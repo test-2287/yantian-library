@@ -75,7 +75,6 @@ const sortData = () => {
 
 const setBarLength = () => {
     let max = Math.max(...arriveData.value.map(item => item.number))
-    // console.log(max);
     let widthRatio = 1094 / max;
     arriveData.value.forEach(item => {
         item.barWidth = parseInt(item.number * widthRatio)
@@ -83,35 +82,33 @@ const setBarLength = () => {
     // console.log(arriveData);
 }
 
-const numberAnimation = (number) => {
+// const numberAnimation = (number) => {}
 
-}
+// const fadeOutAnimation = () => {
+//     tl.to('.arrive-ranking-list', {
+//         opacity: 0
+//     })
 
-const fadeOutAnimation = () => {
-    tl.to('.arrive-ranking-list', {
-        opacity: 0
-    })
+//     tl.to('.light-blue-layer', {
+//         clipPath: `ellipse(700px 700px at 1950px 530px)`
+//     })
+//     tl.to('.light-blue-layer', {
+//         clipPath: `ellipse(280px 280px at 1950px 530px)`
+//     })
 
-    tl.to('.light-blue-layer', {
-        clipPath: `ellipse(700px 700px at 1950px 530px)`
-    })
-    tl.to('.light-blue-layer', {
-        clipPath: `ellipse(280px 280px at 1950px 530px)`
-    })
-
-    tl.to('.light-blue-layer', {
-        opacity: 0
-    })
+//     tl.to('.light-blue-layer', {
+//         opacity: 0
+//     })
 
 
-    tl.to('.blue-layer', {
-        clipPath: `ellipse(630px 630px at right)`,
-        duration: 1.5
-    })
-    tl.to('.blue-layer', {
-        opacity: 0
-    })
-}
+//     tl.to('.blue-layer', {
+//         clipPath: `ellipse(630px 630px at right)`,
+//         duration: 1.5
+//     })
+//     tl.to('.blue-layer', {
+//         opacity: 0
+//     })
+// }
 
 onMounted(() => {
     // setBarLength()

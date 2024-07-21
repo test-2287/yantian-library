@@ -8,30 +8,34 @@ import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
+import { onMounted, ref, nextTick } from 'vue';
+
+import gsap from 'gsap';
+
 // 地图svg 各馆对应坐标
 const leftPart = [
-    { "x": 208.684, "y": 863.401 }, // 沙头角街道图书馆
-    { "x": 228.684, "y": 957.401 }, // 中英街道图书馆
-    { "x": 243.684, "y": 935.401 }, // 中英街图书馆
-    { "x": 258.684, "y": 912.401 }, // 邂逅图书馆
-    { "x": 298.684, "y": 892.401 }, // 海山街道图书馆
-    { "x": 318.684, "y": 836.401 }, // 盐田图书馆
-    { "x": 338.684, "y": 882.401 }, // 灯塔图书馆
+    { "x": 208.684, "y": 863.401, libName: '沙头角街道图书馆' }, // 沙头角街道图书馆
+    { "x": 228.684, "y": 957.401, libName: '中英街道图书馆' }, // 中英街道图书馆
+    { "x": 243.684, "y": 935.401, libName: '中英街图书馆' }, // 中英街图书馆
+    { "x": 258.684, "y": 912.401, libName: '邂逅图书馆' }, // 邂逅图书馆
+    { "x": 298.684, "y": 892.401, libName: '海山街道图书馆' }, // 海山街道图书馆
+    { "x": 318.684, "y": 836.401, libName: '盐田图书馆' }, // 盐田图书馆
+    { "x": 338.684, "y": 882.401, libName: '灯塔图书馆' }, // 灯塔图书馆
 ]
 
 const middlePart = [
-    { "x": 525.684, "y": 610.401 }, // 盐田街道图书馆
-    { "x": 608.684, "y": 578.401 }, // 遇见图书馆
-    { "x": 696.684, "y": 630.401 } // 春天海图书馆
+    { "x": 525.684, "y": 610.401, libName: '盐田街道图书馆' }, // 盐田街道图书馆
+    { "x": 608.684, "y": 578.401, libName: '遇见图书馆' }, // 遇见图书馆
+    { "x": 696.684, "y": 630.401, libName: '春天海图书馆' } // 春天海图书馆
 ]
 
 const rightPart = [
-    { "x": 974.684, "y": 718.401 }, // 悦海图书馆
-    { "x": 1030.68, "y": 598.401 }, // 栖息图书馆
-    { "x": 1036.68, "y": 634.401 }, // 听海图书馆
-    { "x": 1063.68, "y": 571.401 }, // 梅沙街道图书馆
-    { "x": 1178.68, "y": 644.401 }, // 观海图书馆
-    { "x": 1323.68, "y": 692.401 } // 望海图书馆
+    { "x": 974.684, "y": 718.401, libName: '悦海图书馆' }, // 悦海图书馆
+    { "x": 1030.68, "y": 598.401, libName: '栖息图书馆' }, // 栖息图书馆
+    { "x": 1036.68, "y": 634.401, libName: '听海图书馆' }, // 听海图书馆
+    { "x": 1063.68, "y": 571.401, libName: '梅沙街道图书馆' }, // 梅沙街道图书馆
+    { "x": 1178.68, "y": 644.401, libName: '观海图书馆' }, // 观海图书馆
+    { "x": 1323.68, "y": 692.401, libName: '望海图书馆' } // 望海图书馆
 ]
 
 const libConditionArray = [
@@ -43,7 +47,56 @@ const libConditionArray = [
     { name: "听海图书馆", condition: '良好' },
 ]
 
+let conditionBubblesArray = ref([])
+const getConditionBubblesArray = () => {
+    const leftRandomIndex = Math.floor(Math.random() * leftPart.length)
+    const middleRandomIndex = Math.floor(Math.random() * middlePart.length)
+    const rightRandomIndex = Math.floor(Math.random() * rightPart.length)
 
+    return [
+        {
+            humidity: 30,
+            ...leftPart[leftRandomIndex]
+        },
+        {
+            humidity: 30,
+            ...middlePart[middleRandomIndex]
+        },
+        {
+            humidity: 30,
+            ...rightPart[rightRandomIndex]
+        }
+    ]
+}
+conditionBubblesArray.value = getConditionBubblesArray()
+const animationBubbles = async () => {
+    await nextTick()
+    const tlBubble = gsap.timeline({
+        onComplete: async () => {
+            conditionBubblesArray.value = getConditionBubblesArray()
+            console.log(conditionBubblesArray.value)
+            await nextTick()
+            animationBubbles()
+        }
+    });
+    tlBubble.from('.lib-condition-bubble', {
+        opacity: 0
+    })
+    tlBubble.to('.lib-condition-bubble', {
+        opacity: 1,
+        duration: 2,
+        stagger: 0.7,
+    })
+    .to('.lib-condition-bubble', {
+        opacity: 0,
+        duration: 2,
+        stagger: 0.7
+    })
+}
+
+onMounted(() => {
+    // animationBubbles()
+})
 
 
 
@@ -80,9 +133,8 @@ const libConditionArray = [
         <div class="map-section">
             <YanTianMap />
 
-            <ConditionBubble v-bind="{ libName: '沙头角图书馆', humidity: 30, position: { x: 208, y: 863 } }" />
-            <ConditionBubble v-bind="{ libName: '遇见图书馆', humidity: 30, position: { x: 608, y: 578 } }" />
-            <ConditionBubble v-bind="{ libName: '望海图书馆', humidity: 30, position: { x: 1323, y: 692 } }" />
+            <ConditionBubble v-for="bubbleItem in conditionBubblesArray" :key="`${bubbleItem.libName}`"
+                v-bind="bubbleItem" />
         </div>
         <div class="lib-swiper-section">
             <swiper :pagination="true" :modules="[Pagination, Autoplay]" :autoplay="{ delay: 2000 }">
@@ -242,11 +294,11 @@ const libConditionArray = [
     }
 }
 
-::v-deep .swiper {
+:deep(.swiper) {
     padding-bottom: 80px;
 }
 
-::v-deep .swiper-pagination {
+:deep(.swiper-pagination) {
     .swiper-pagination-bullet {
         width: 36px;
         height: 36px;
@@ -254,6 +306,7 @@ const libConditionArray = [
         border: 4px solid #3692FF;
         margin: 0 10px;
     }
+
     .swiper-pagination-bullet-active {
         background-color: #3692FF;
     }

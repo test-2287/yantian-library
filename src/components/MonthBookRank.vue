@@ -1,4 +1,6 @@
 <script setup>
+import BookCover from '@/assets/svg/book-cover.svg'
+
 const monthBookRank = [
     {
         bookName: '思考，好与坏',
@@ -58,7 +60,9 @@ const monthBookRank = [
                 <div class="top-section">
                     <div class="rank-number">{{ i + 1 }}</div>
                     <div class="book-image-box">
-                        <div class="book-image"></div>
+                        <div class="book-image">
+                            <BookCover />
+                        </div>
                     </div>
                 </div>
                 <div class="bottom-section">

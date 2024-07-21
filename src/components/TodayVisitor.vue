@@ -8,10 +8,7 @@ import 'swiper/css/pagination';
 
 import { onMounted } from 'vue';
 
-
-// insertAjacentHTML createElementNS 
 const svg = document.getElementById('mySvg');
-
 // Create a rectangle element with the correct namespace
 // const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
 // rect.setAttribute('x', '10');
@@ -22,6 +19,8 @@ const svg = document.getElementById('mySvg');
 
 // // Append the rectangle to the SVG
 // svg.appendChild(rect);
+
+
 
 // 地图svg 各馆对应坐标
 const leftPart = [
@@ -51,14 +50,12 @@ const rightPart = [
 
 // 热力图 原点半径 大36-红#FB461E 中20-橘#FF852D 小20-淡黄#FFE791
 onMounted(() => {
-    // const heatMapSvg = document.getElementsByClassName('heatMap')[0]; 
     const heatMapSvg = document.querySelector('.heatMap');
     // console.log(heatMapSvg)
     // console.log(circleString)
     heatMapSvg.insertAdjacentHTML('beforeend', circleString)
 })
-// const heatMapSvg = document.getElementsByClassName('heatMap')[0];
-// const heatMapSvg = document.querySelector('.heatMap');    
+
 const heatRed = '#FB461E'
 const heatOrange = '#FF852D'
 const heatYellow = '#FFE791'
@@ -66,7 +63,6 @@ const bigRadius = 36
 const middleRadius = 20
 const smallRaidus = 20
 
-// console.log(heatMapSvg)
 const circleString = `
     <circle cx="${leftPart[0].x}" cy="${leftPart[0].y}" r="${middleRadius}" fill="${heatOrange}" />
     <circle cx="${leftPart[1].x}" cy="${leftPart[1].y}" r="${middleRadius}" fill="${heatOrange}" />
@@ -86,18 +82,7 @@ const circleString = `
     <circle cx="${rightPart[3].x}" cy="${rightPart[3].y}" r="${middleRadius}" fill="${heatOrange}" />
     <circle cx="${rightPart[4].x}" cy="${rightPart[4].y}" r="${middleRadius}" fill="${heatYellow}" />
     <circle cx="${rightPart[5].x}" cy="${rightPart[5].y}" r="${middleRadius}" fill="${heatOrange}" />
-
-
-
 `
-
-/*  */ 
-
-// const tempContainer = document.createElement('div')
-// tempContainer.innerHTML = circleString
-
-// heatMapSvg.insertAdjacentHTML('beforeend', circleString)
-
 
 const visitorArray = [
     {
@@ -225,17 +210,24 @@ const visitorArray = [
                 top: 30px;
                 right: 30px;
                 background-color: #FFE791;
-            }
 
+                &.orange {
+                    background-color: #FF852D;
+                }
+
+                &.red {
+                    background-color: #FB461E;
+                }
+            }
         }
     }
 }
 
-::v-deep .swiper {
+:deep(.swiper) {
     padding-bottom: 80px;
 }
 
-::v-deep .swiper-pagination {
+:deep(.swiper-pagination) {
     .swiper-pagination-bullet {
         width: 36px;
         height: 36px;

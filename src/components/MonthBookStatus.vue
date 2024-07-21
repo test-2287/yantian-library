@@ -4,12 +4,16 @@ import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
+import libImage from '@/assets/svg/icon-lib.svg?url'
+console.log(libImage)
+
 const halfYearMonths = [1, 2, 3, 4, 5, 6]
 const libSwiperList = [
     {
         libname: '盐田图书馆',
         borrow: 12394,
         return: 12944,
+        image: libImage,
         monthsData: [
             {
                 borrow: 200,
@@ -41,6 +45,7 @@ const libSwiperList = [
         libname: '邂逅图书馆',
         borrow: 12394,
         return: 12944,
+        image: libImage,
         monthsData: [
             {
                 borrow: 200,
@@ -72,6 +77,7 @@ const libSwiperList = [
         libname: '观海图书馆',
         borrow: 12394,
         return: 12944,
+        image: libImage,
         monthsData: [
             {
                 borrow: 200,
@@ -103,6 +109,7 @@ const libSwiperList = [
         libname: '灯塔图书馆',
         borrow: 12394,
         return: 12944,
+        image: libImage,
         monthsData: [
             {
                 borrow: 200,
@@ -133,6 +140,8 @@ const libSwiperList = [
 
 ]
 
+// console.log(libSwiperList);
+
 
 
 </script>
@@ -155,6 +164,8 @@ const libSwiperList = [
                                 <div class="title">{{ libData.libname }}</div>
                                 <div class="subtitle borrow">借书 {{ libData.borrow }}册</div>
                                 <div class="subtitle return">还书 {{ libData.return }}册</div>
+
+                                <div class="lib-image" :style="{backgroundImage: `url(${libData.image})`}"></div>
                             </div>
                             <div class="bottom-section">
                                 <div class="month-col">
@@ -231,6 +242,7 @@ const libSwiperList = [
     display: flex;
     flex-direction: column;
     margin-bottom: 70px;
+    position: relative;
 
     .title {
         font-size: 48px;
@@ -256,6 +268,16 @@ const libSwiperList = [
 
     .return {
         color: #68C945;
+    }
+
+    .lib-image {
+        position: absolute;
+        bottom: 0;
+        right: -107px;
+        height: 233px;
+        width: 350px;
+        background-position: center;
+        background-repeat: no-repeat;
     }
 }
 

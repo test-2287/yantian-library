@@ -1,5 +1,4 @@
 <script setup>
-import LibFacade from '@/assets/svg/lib-facade.svg';
 import FacadeRoad from '@/assets/svg/facade-road.svg';
 import FacadeTree from '@/assets/svg/tree.svg';
 import FacadeCloud from '@/assets/svg/cloud.svg';

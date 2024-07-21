@@ -57,7 +57,7 @@ import YanTianMap from '@/assets/svg/full-map.svg'
     padding: 52px;
     padding-bottom: 116px;
     background-image: url('@/assets/svg/bubble-515.svg');
-    background-size: contain;
+    background-size: cover;
 
     font-size: 40px;
     line-height: 58px;

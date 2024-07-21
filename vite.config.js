@@ -12,7 +12,21 @@ export default defineConfig({
     vue(),
     vueJsx(),
     VueDevTools(),
-    svgLoader()
+    svgLoader(
+      {
+        svgo: false
+      }
+
+
+      // {
+      //   svgoConfig: {
+      //     plugins: [
+      //       { removeViewBox: false, },
+      //       { removeDimensions: true }
+      //     ]
+      //   }
+      // }
+    )
   ],
   resolve: {
     alias: {

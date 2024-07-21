@@ -7,29 +7,33 @@ import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
+import { ref, nextTick, onMounted } from 'vue';
+import gsap from 'gsap';
+
+// 地图svg 各馆对应坐标
 const leftPart = [
-    { "x": 208.684, "y": 863.401 }, // 沙头角街道图书馆
-    { "x": 228.684, "y": 957.401 }, // 中英街道图书馆
-    { "x": 243.684, "y": 935.401 }, // 中英街图书馆
-    { "x": 258.684, "y": 912.401 }, // 邂逅图书馆
-    { "x": 298.684, "y": 892.401 }, // 海山街道图书馆
-    { "x": 318.684, "y": 836.401 }, // 盐田图书馆
-    { "x": 338.684, "y": 882.401 }, // 灯塔图书馆
+    { "x": 208.684, "y": 863.401, libName: '沙头角街道图书馆' }, // 沙头角街道图书馆
+    { "x": 228.684, "y": 957.401, libName: '中英街道图书馆' }, // 中英街道图书馆
+    { "x": 243.684, "y": 935.401, libName: '中英街图书馆' }, // 中英街图书馆
+    { "x": 258.684, "y": 912.401, libName: '邂逅图书馆' }, // 邂逅图书馆
+    { "x": 298.684, "y": 892.401, libName: '海山街道图书馆' }, // 海山街道图书馆
+    { "x": 318.684, "y": 836.401, libName: '盐田图书馆' }, // 盐田图书馆
+    { "x": 338.684, "y": 882.401, libName: '灯塔图书馆' }, // 灯塔图书馆
 ]
 
 const middlePart = [
-    { "x": 525.684, "y": 610.401 }, // 盐田街道图书馆
-    { "x": 608.684, "y": 578.401 }, // 遇见图书馆
-    { "x": 696.684, "y": 630.401 } // 春天海图书馆
+    { "x": 525.684, "y": 610.401, libName: '盐田街道图书馆' }, // 盐田街道图书馆
+    { "x": 608.684, "y": 578.401, libName: '遇见图书馆' }, // 遇见图书馆
+    { "x": 696.684, "y": 630.401, libName: '春天海图书馆' } // 春天海图书馆
 ]
 
 const rightPart = [
-    { "x": 974.684, "y": 718.401 }, // 悦海图书馆
-    { "x": 1030.68, "y": 598.401 }, // 栖息图书馆
-    { "x": 1036.68, "y": 634.401 }, // 听海图书馆
-    { "x": 1063.68, "y": 571.401 }, // 梅沙街道图书馆
-    { "x": 1178.68, "y": 644.401 }, // 观海图书馆
-    { "x": 1323.68, "y": 692.401 } // 望海图书馆
+    { "x": 974.684, "y": 718.401, libName: '悦海图书馆' }, // 悦海图书馆
+    { "x": 1030.68, "y": 598.401, libName: '栖息图书馆' }, // 栖息图书馆
+    { "x": 1036.68, "y": 634.401, libName: '听海图书馆' }, // 听海图书馆
+    { "x": 1063.68, "y": 571.401, libName: '梅沙街道图书馆' }, // 梅沙街道图书馆
+    { "x": 1178.68, "y": 644.401, libName: '观海图书馆' }, // 观海图书馆
+    { "x": 1323.68, "y": 692.401, libName: '望海图书馆' } // 望海图书馆
 ]
 
 const libBorrowArray = [
@@ -43,6 +47,59 @@ const libBorrowArray = [
     { libname: "听海图书馆", borrowCount: 128 },
 ]
 
+let borrowBubblesArray = ref([])
+const getBorrowBubblesArray = () => {
+    const leftRandomIndex = Math.floor(Math.random() * leftPart.length)
+    const middleRandomIndex = Math.floor(Math.random() * middlePart.length)
+    const rightRandomIndex = Math.floor(Math.random() * rightPart.length)
+
+    return [
+        {
+            username: '李**',
+            ...leftPart[leftRandomIndex]
+        },
+        {
+            username: '张**',
+            ...middlePart[middleRandomIndex]
+        },
+        {
+            username: '王**',
+            ...rightPart[rightRandomIndex]
+        }
+    ]
+}
+borrowBubblesArray.value = getBorrowBubblesArray()
+const animationBubbles = async () => {
+    await nextTick()
+    const tlBubble = gsap.timeline({
+        onComplete: async () => {
+            borrowBubblesArray.value = getBorrowBubblesArray()
+            console.log(borrowBubblesArray.value);
+            await nextTick()
+            animationBubbles()
+        }
+    });
+    tlBubble.from('.borrow-bubble', {
+        opacity: 0,
+    })
+    tlBubble.to('.borrow-bubble', {
+        opacity: 1,
+        duration: 2,
+        stagger: 0.7,
+    })
+    .to('.borrow-bubble', {
+        opacity: 0,
+        duration: 2,
+        stagger: 0.7,
+    })
+}
+
+onMounted(() => {
+    animationBubbles()
+})
+
+
+
 </script>
 
 <template>
@@ -54,9 +111,7 @@ const libBorrowArray = [
         <div class="map-section">
             <YanTianMap />
 
-            <BorrowBubble v-bind="{ libname: '盐田图书馆', username: '李**', position: { x: 318, y: 836 } }" />
-            <BorrowBubble v-bind="{ libname: '遇见图书馆', username: '李**', position: { x: 608, y: 578 } }" />
-            <BorrowBubble v-bind="{ libname: '梅沙街道图书馆', username: '李**', position: { x: 1063, y: 571 } }" />
+            <BorrowBubble v-for="borrowItem in borrowBubblesArray" :key="`${borrowItem.username}`" v-bind="borrowItem" />
 
         </div>
         <div class="borrow-data-section">
@@ -125,12 +180,27 @@ const libBorrowArray = [
             color: #3692FF;
             font-weight: 700 !important;
 
+            position: relative;
+
             &:nth-child(2n+1) {
                 margin-right: 50px;
             }
 
             &:not(:nth-last-child(-n+2)) {
                 margin-bottom: 30px;
+            }
+
+            &::before {
+                content: '';
+                display: block;
+                position: absolute;
+                top: 11px;
+                left:0;
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                background-color: #FFE791;
+                border: 4px solid #3692FF;
             }
 
         }
@@ -143,11 +213,11 @@ const libBorrowArray = [
     left: 1091px;
 }
 
-::v-deep .swiper {
+:deep(.swiper) {
     padding-bottom: 110px;
 }
 
-::v-deep .swiper-pagination {
+:deep(.swiper-pagination) {
     .swiper-pagination-bullet {
         width: 36px;
         height: 36px;

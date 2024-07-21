@@ -1,5 +1,6 @@
 <script setup>
-
+import qrCodeService from '@/assets/svg/qrcode-service.svg';
+import qrCodeSubscribe from '@/assets/svg/qrcode-subscribe.svg';
 </script>
 
 <template>
@@ -15,13 +16,17 @@
         <div class="qrcode-section">
             <div class="code-container">
                 <div class="code-box">
-                    <div class="code-image"></div>
+                    <div class="code-image">
+                        <qrCodeService />
+                    </div>
                 </div>
                 <div class="desc-text">微信服务号</div>
             </div>
             <div class="code-container">
                 <div class="code-box">
-                    <div class="code-image"></div>
+                    <div class="code-image">
+                        <qrCodeSubscribe />
+                    </div>
                 </div>
                 <div class="desc-text">微信订阅号</div>
             </div>
@@ -96,7 +101,7 @@
     padding-right: 150px;
     background-image: url('@/assets/svg/bubble-607.svg');
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
 
     font-size: 48px;
     line-height: 70px;

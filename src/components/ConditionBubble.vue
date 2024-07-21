@@ -12,18 +12,23 @@ const props = defineProps({
         type: String,
         default: ''
     },
-    position: {
-        type: Object,
-        default: () => {
-            x: 0
-            y: 0
-        }
+    x: {
+        type: Number,
+        default: 0
+    },
+    y: {
+        type: Number,
+        default: 0
+    },
+    libCondition: {
+        type: String,
+        default: '良好'
     }
 })
 </script>
 
 <template>
-    <div class="lib-condition-bubble" :style="{ left: `${position.x - 125}px`, top: `${position.y - 215}px` }">
+    <div class="lib-condition-bubble" :style="{ left: `${x - 125}px`, top: `${y - 215}px` }">
         <div class="lib-name">{{ libName }}</div>
         <div class="lib-condition">
             <div class="item">
@@ -33,7 +38,7 @@ const props = defineProps({
             <div class="item">
                 <div class="item-label">空气质量</div>
                 <div class="item-desc">
-                    <span>良好 </span>
+                    <span>{{ libCondition }} </span>
                     <i></i>
                 </div>
             </div>
@@ -76,6 +81,17 @@ const props = defineProps({
     }
     .item-desc {
         color: #3692FF;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        i {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: #68C945;
+            margin-left: 6px;
+        }
     }
+
 }
 </style>

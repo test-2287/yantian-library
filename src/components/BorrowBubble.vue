@@ -6,27 +6,28 @@ const props = defineProps({
         type: String,
         default: ''
     },
-    libname: {
+    libName: {
         type: String,
         default: ''
     },
-    position: {
-        type: Object,
-        default: () => {
-            x:0;
-            y:0;
-        }
+    x: {
+        type: Number,
+        default: 0
+    },
+    y : {
+        type: Number,
+        default: 0
     }
 })
 </script>
 
 <template>
-    <div class="borrow-bubble" :style="{left: `${position.x - 61}px`, top: `${position.y - 215}px`}">
+    <div class="borrow-bubble" :style="{left: `${x - 61}px`, top: `${y - 215}px`}">
         <UserBorrowIcon class="user-icon"/>
         <div class="text">
             <span class="username">{{ username }}</span>
             读者在
-            <span class="libname">{{ libname }}</span>
+            <span class="libname">{{ libName }}</span>
             外借图书
         </div>
     </div>
@@ -39,7 +40,8 @@ const props = defineProps({
     height: 180px;
     padding: 32px 27px;
     background-image: url('@/assets/svg/user-borrow-bubble.svg');
-    background-size: contain;
+    background-size: cover;
+    /* opacity: 0; */
 
     .user-icon {
         width: 64px;
