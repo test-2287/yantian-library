@@ -55,6 +55,9 @@ import qrCodeSubscribe from '@/assets/svg/qrcode-subscribe.svg';
     .right-section {
         text-align: right;
     }
+    div {
+        font-weight: 700;
+    }
 }
 
 .qrcode-section {

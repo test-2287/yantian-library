@@ -37,11 +37,11 @@ onMounted(() => {
 
     <div class="section-floors">
 
-        <!-- <LibFacade /> -->
+        <LibFacade />
         <!-- <FloorOne></FloorOne> -->
-        <component :is="animationOrder[animationArray[currentFloor]]" 
+        <!-- <component :is="animationOrder[animationArray[currentFloor]]" 
         v-on:animation-complete="onAnimationUpdate"
-        />
+        /> -->
 
     </div>
 </template>

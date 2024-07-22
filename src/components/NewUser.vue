@@ -40,6 +40,9 @@ import YanTianMap from '@/assets/svg/full-map.svg'
     .right-section {
         text-align: right;
     }
+    div {
+        font-weight: 700;
+    }
 }
 
 .map-section {

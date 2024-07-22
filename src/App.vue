@@ -25,36 +25,50 @@ import { eachDayOfInterval, endOfMonth, endOfWeek, format, isSameMonth, isToday,
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Pagination, Autoplay } from 'swiper/modules';
 
-const animationOrder = {
-  FloorDisplay,
-  LibTemperature,
-  HalfYearArrive,
-  MonthBookStatus,
-  MonthBookRank,
-  TodayVisitor,
-  TodayLibCondition,
-  TodayBorrow,
-  NewUser,
-  NewFollow,
-  BookCirculate,
-  TopBorrower,
-}
+// const animationOrder = {
+//   FloorDisplay,
+//   LibTemperature,
+//   HalfYearArrive,
+//   MonthBookStatus,
+//   MonthBookRank,
+//   TodayVisitor,
+//   TodayLibCondition,
+//   TodayBorrow,
+//   NewUser,
+//   NewFollow,
+//   BookCirculate,
+//   TopBorrower,
+// }
 
-const animationArray = [
-  'FloorDisplay',  //0
-  'TodayLibCondition', //1
-  'TodayVisitor', //2
-  'HalfYearArrive', //3
-  'TodayBorrow', //4
-  'MonthBookStatus', //5
-  'NewUser', //6
-  'TopBorrower', //7
-  'NewFollow', //8
-  'MonthBookRank', //9
-  'BookCirculate' //10
+// const animationArray = [
+//   'FloorDisplay',  //0
+//   'TodayLibCondition', //1
+//   'TodayVisitor', //2
+//   'HalfYearArrive', //3
+//   'TodayBorrow', //4
+//   'MonthBookStatus', //5
+//   'NewUser', //6
+//   'TopBorrower', //7
+//   'NewFollow', //8
+//   'MonthBookRank', //9
+//   'BookCirculate' //10
+// ]
+
+const animationOrder = [
+  FloorDisplay,  //0
+  TodayLibCondition, //1
+  TodayVisitor, //2
+  HalfYearArrive, //3
+  TodayBorrow, //4
+  MonthBookStatus, //5
+  NewUser, //6
+  TopBorrower, //7
+  NewFollow, //8
+  MonthBookRank, //9
+  BookCirculate //10
 ]
 
-const curAnimation = ref(1)
+const curAnimation = ref(0)
 
 // const today = new Date(2024, 8, 1)
 const today = new Date()
@@ -74,6 +88,7 @@ days.forEach(day => {
 
 const isLibOpen = ref(true)  // 闭馆为flase
 
+// console.log(animationOrder[curAnimation.value]);
 
 </script>
 
@@ -161,8 +176,9 @@ const isLibOpen = ref(true)  // 闭馆为flase
     </div>
 
     <div class="section-main">
-      <!-- <FloorDisplay /> -->
-      <component :is="animationOrder[animationArray[curAnimation]]" />
+      <FloorDisplay />
+      <!-- <component :is="animationOrder[animationArray[curAnimation]]" /> -->
+      <!-- <component :is="animationOrder[curAnimation]" /> -->
     </div>
 
     <div class="section-notice">

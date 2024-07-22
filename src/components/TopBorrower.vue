@@ -27,6 +27,9 @@
     font-weight: 600;
     line-height: 92.67px;
     color: #3692FF;
+    div {
+        font-weight: 600;
+    }
 }
 
 .bubble-box {

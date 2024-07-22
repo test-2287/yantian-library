@@ -4,7 +4,10 @@
 <path d="M123.001 537.999C243.898 320.543 535.001 211 763.001 423.001" stroke="#88BFFF" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 6"/>
 <path d="M117.001 546C246.001 274 454.001 106 823.001 342" stroke="#88BFFF" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 6"/>
 <path d="M117.349 545.69C255.001 250.999 711.501 70.4999 967.501 348.5" stroke="#88BFFF" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 6"/>
-<path d="M117.35 545.691C223.002 269.999 667.001 -112 1113 396.001" stroke="#88BFFF" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 6"/>
+
+<!-- 小车的路径 -->
+<path class="car-path" d="M117.35 545.691C223.002 269.999 667.001 -112 1113 396.001" stroke="#88BFFF" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 6"/>
+
 <path d="M117.001 548.998C125.001 397 373.001 -25 861.001 280.999" stroke="#88BFFF" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 6"/>
 <path d="M116.997 548.858C153.996 397.86 390.002 12.9999 817.002 305" stroke="#88BFFF" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 6"/>
 <path d="M118.502 548C164.502 446 194.502 233.003 482.502 339.002" stroke="#88BFFF" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 6"/>

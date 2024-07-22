@@ -2,6 +2,37 @@
 import YanTianMap from '@/assets/svg/full-map.svg'
 import CirculateLine from '@/assets/svg/book-circulate-line.svg'
 import IconCar from '@/assets/svg/car.svg'
+import DiagolLine from '@/assets/svg/diagol-line.svg'
+import PolyLine from '@/assets/svg/polyline.svg'
+
+import { onMounted } from 'vue'
+import gsap from 'gsap'
+import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
+
+
+onMounted(() => {
+    gsap.registerPlugin(MotionPathPlugin)
+
+    gsap.to('.circulate-line path', {
+        strokeDashoffset: -12, // stroke-dasharray(dash+gap)=6+6=12
+        duration: 0.6,
+        ease:'none',
+        repeat: -1
+    })
+
+    gsap.to('.icon-car', {
+        duration: 8,
+        repeat: -1,
+        ease: 'none',
+        motionPath: {
+            path: '.car-path',
+            align: '.car-path',
+            autoRotate: true,
+            alignOrigin: [0.5, 0.618]
+        }
+    })
+})
+
 
 
 
@@ -39,6 +70,7 @@ import IconCar from '@/assets/svg/car.svg'
                     沙头角街道
                 </div>
             </div>
+            <DiagolLine class="line-shatoujiao" />
 
             <div class="district-data yantian">
                 <div class="top">
@@ -49,6 +81,7 @@ import IconCar from '@/assets/svg/car.svg'
                     盐田街道
                 </div>
             </div>
+            <DiagolLine class="line-yantian" />
 
             <div class="district-data meisha">
                 <div class="top">
@@ -56,9 +89,10 @@ import IconCar from '@/assets/svg/car.svg'
                     <div>流入图书: 18347册</div>
                 </div>
                 <div class="bottom lib-name">
-                    梅山街道
+                    梅沙街道
                 </div>
             </div>
+            <DiagolLine class="line-meisha" />
 
             <div class="district-data haishan">
                 <div class="top">
@@ -69,6 +103,7 @@ import IconCar from '@/assets/svg/car.svg'
                     海山街道
                 </div>
             </div>
+            <PolyLine class="line-haishan"/>
 
         </div>
     </div>
@@ -145,19 +180,43 @@ import IconCar from '@/assets/svg/car.svg'
         top: 413px;
         left: -163px;
     }
+    .line-shatoujiao {
+        position: absolute;
+        left: 24px;
+        top: 590px;
+    }
 
     .yantian {
         top: 64px;
         left: 220px;
     }
+    .line-yantian {
+        position: absolute;
+        left: 404px;
+        top: 242px;
+    }
+
 
     .meisha {
         top: 95px;
         left: 1200px;
     }
+    .line-meisha {
+        transform: scaleX(-1);
+        transform-origin: center center;
+        position: absolute;
+        left: 1191px;
+        top: 294px;
+    }
+
     .haishan {
         top: 859px;
         left: 1200px;
+    }
+    .line-haishan {
+        position: absolute;
+        left: 436px;
+        top: 849px;
     }
 
 }

@@ -5,7 +5,6 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 import libImage from '@/assets/svg/icon-lib.svg?url'
-console.log(libImage)
 
 const halfYearMonths = [1, 2, 3, 4, 5, 6]
 const libSwiperList = [
@@ -140,7 +139,10 @@ const libSwiperList = [
 
 ]
 
-// console.log(libSwiperList);
+
+const getBarLength = (bookCount) => {
+    // bar max width = 220px  需要拿数组中最大的值进行等比换算 或者 规定一个具体的数字
+}
 
 
 
@@ -156,7 +158,7 @@ const libSwiperList = [
         </div>
 
         <div class="lib-section">
-            <swiper :modules="[Autoplay]">
+            <swiper :modules="[Autoplay, Pagination]" :pagination="{el: '.custom-pagination', clickable: true}">
                 <swiper-slide v-for="i in 3" :key="`swiper${i}`">
                     <div class="lib-container">
                         <div class="lib-box" v-for="libData in libSwiperList" :key="`${libData.libname}`">
@@ -189,6 +191,8 @@ const libSwiperList = [
                     </div>
                 </swiper-slide>
             </swiper>
+
+            <div class="custom-pagination"></div>
         </div>
     </div>
 </template>
@@ -199,6 +203,7 @@ const libSwiperList = [
     padding: 70px;
     padding-bottom: 105px;
     background-color: #E7F2FF;
+    position: relative;
 }
 
 .title-section {
@@ -221,6 +226,27 @@ const libSwiperList = [
 .lib-section {
     margin-top: 98px;
     padding: 0 24px;
+}
+
+:deep(.custom-pagination) {
+    position: absolute;
+    z-index: 1;
+    right: 80px;
+    top: 107px;
+    left: unset;
+    width: auto;
+    height: 34px;
+    .swiper-pagination-bullet {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background-color: #fff;
+        border: 4px solid #3692FF;
+        margin: 0 10px;
+    }
+    .swiper-pagination-bullet-active {
+        background-color: #3692FF;
+    }
 }
 
 .lib-container {

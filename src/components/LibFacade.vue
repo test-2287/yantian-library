@@ -8,6 +8,7 @@ import WallLeft from '@/assets/svg/wall-left.svg?skipsvgo';
 import WallRight from '@/assets/svg/wall-right.svg?skipsvgo';
 import FloorPlate from '@/assets/svg/floor-plate.svg';
 import BOne from '@/assets/svg/b1.svg?skipsvgo';
+import LibFacade from '@/assets/svg/lib-facade.svg';
 
 import gsap from 'gsap';
 import { ref, onMounted } from 'vue';
@@ -20,67 +21,67 @@ const emit = defineEmits(['animation-complete'])
 
 onMounted(() => {
 
-    // tl.from(libBox.value, {
-    //     opacity: 0,
-    //     scale: 0,
-    //     transformOrigin: 'center bottom',
-    //     duration: 3,
-    // })
+    tl.from(libBox.value, {
+        opacity: 0,
+        scale: 0,
+        transformOrigin: 'center bottom',
+        duration: 3,
+    })
 
-    // tl.from('.road', {
-    //     opacity: 0,
-    //     duration: 3,
-    // })
+    tl.from('.road', {
+        opacity: 0,
+        duration: 3,
+    })
 
-    // tl.from('.tree', {
-    //     opacity: 0,
-    //     scale: 0,
-    //     transformOrigin: 'center bottom',
-    //     stagger: 0.8,
-    //     duration: 3,
-    // }, '-=3')
+    tl.from('.tree', {
+        opacity: 0,
+        scale: 0,
+        transformOrigin: 'center bottom',
+        stagger: 0.8,
+        duration: 3,
+    }, '-=3')
 
-    // tl.from('.cloud1', {
-    //     opacity: 0
-    // })
+    tl.from('.cloud1', {
+        opacity: 0
+    })
 
-    // tl.to('.cloud1', {
-    //     opacity: 1
-    // }).to('.cloud1', {
-    //     x: -150,
-    //     y: 100,
-    //     duration: 2
-    // })
+    tl.to('.cloud1', {
+        opacity: 1
+    }).to('.cloud1', {
+        x: -150,
+        y: 100,
+        duration: 2
+    })
 
-    // tl.from('.cloud2', {
-    //     opacity: 0
-    // }, "-=1.5")
-    // tl.to('.cloud2', {
-    //     opacity: 1
-    // }).to('.cloud1', {
-    //     opacity: 0
-    // }).to('.cloud2', {
-    //     x: -150,
-    //     y: 100,
-    //     duration: 1
-    // }, '-=1')
+    tl.from('.cloud2', {
+        opacity: 0
+    }, "-=1.5")
+    tl.to('.cloud2', {
+        opacity: 1
+    }).to('.cloud1', {
+        opacity: 0
+    }).to('.cloud2', {
+        x: -150,
+        y: 100,
+        duration: 1
+    }, '-=1')
 
-    // tl.to('.treeGroup1', {
-    //     opacity: 0,
-    //     duration: 1.5
-    // }, '-=2').to('.road', {
-    //     opacity: 0,
-    //     duration: 1.5
-    // }, '-=2').to('.lib', {
-    //     opacity: 0.1,
-    //     duration: 4
-    // }).to('.treeGroup2', {
-    //     opacity: 0,
-    //     duration: 1.5
-    // }, '-=2.5').to('.cloud2', {
-    //     opacity: 0,
-    //     duration:0.6
-    // }, '-=2.5')
+    tl.to('.treeGroup1', {
+        opacity: 0,
+        duration: 1.5
+    }, '-=2').to('.road', {
+        opacity: 0,
+        duration: 1.5
+    }, '-=2').to('.lib', {
+        opacity: 0.1,
+        duration: 4
+    }).to('.treeGroup2', {
+        opacity: 0,
+        duration: 1.5
+    }, '-=2.5').to('.cloud2', {
+        opacity: 0,
+        duration:0.6
+    }, '-=2.5')
 
     tl.from('.libFloors', {
         opacity: 0,
@@ -161,20 +162,20 @@ onMounted(() => {
     })
 
 
-    tl.eventCallback('onComplete', () => {
-        tl.tweenTo('showFloor', {
-            onComplete: () => {
-                gsap.to('.floor-b1', {
-                    opacity: 0,
-                    y: -20,
-                    duration: 2,
-                    onComplete: () => {
-                        emit('animation-complete')
-                    }
-                })
-            }
-        })
-    })
+    // tl.eventCallback('onComplete', () => {
+    //     tl.tweenTo('showFloor', {
+    //         onComplete: () => {
+    //             gsap.to('.floor-b1', {
+    //                 opacity: 0,
+    //                 y: -20,
+    //                 duration: 2,
+    //                 onComplete: () => {
+    //                     emit('animation-complete')
+    //                 }
+    //             })
+    //         }
+    //     })
+    // })
 
 });
 
@@ -253,6 +254,10 @@ onMounted(() => {
     bottom: -6px;
 }
 
+.tree {
+    width: 123px;
+    height: 200px;
+}
 .tree1 {
     left: -360px;
     top: 450px;
