@@ -176,9 +176,9 @@ const isLibOpen = ref(true)  // 闭馆为flase
     </div>
 
     <div class="section-main">
-      <FloorDisplay />
+      <!-- <FloorDisplay /> -->
       <!-- <component :is="animationOrder[animationArray[curAnimation]]" /> -->
-      <!-- <component :is="animationOrder[curAnimation]" /> -->
+      <component :is="animationOrder[curAnimation]" />
     </div>
 
     <div class="section-notice">

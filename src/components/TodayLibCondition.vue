@@ -95,7 +95,7 @@ const animationBubbles = async () => {
 }
 
 onMounted(() => {
-    // animationBubbles()
+    animationBubbles()
 })
 
 

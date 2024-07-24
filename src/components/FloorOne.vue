@@ -4,7 +4,7 @@ import FloorOne from '@/assets/svg/floor-1.svg';
 import WallLeft from '@/assets/svg/wall-left.svg?skipsvgo';
 import WallRight from '@/assets/svg/wall-right.svg?skipsvgo';
 import FloorPlate from '@/assets/svg/floor-plate.svg';
-import OneFloor from '@/assets/svg/1f.svg?skipsvgo';
+// import OneFloor from '@/assets/svg/1f.svg?skipsvgo';
 
 import { onMounted } from 'vue';
 
