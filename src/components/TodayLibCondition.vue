@@ -8,9 +8,11 @@ import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-import { onMounted, ref, nextTick } from 'vue';
+import { onMounted, ref, nextTick, onBeforeUnmount } from 'vue';
 
 import gsap from 'gsap';
+
+const emit = defineEmits(['current-animation-finish'])
 
 // 地图svg 各馆对应坐标
 const leftPart = [
@@ -48,6 +50,7 @@ const libConditionArray = [
 ]
 
 let conditionBubblesArray = ref([])
+let tlBubble = null
 const getConditionBubblesArray = () => {
     const leftRandomIndex = Math.floor(Math.random() * leftPart.length)
     const middleRandomIndex = Math.floor(Math.random() * middlePart.length)
@@ -68,10 +71,11 @@ const getConditionBubblesArray = () => {
         }
     ]
 }
+
 conditionBubblesArray.value = getConditionBubblesArray()
 const animationBubbles = async () => {
     await nextTick()
-    const tlBubble = gsap.timeline({
+    tlBubble = gsap.timeline({
         onComplete: async () => {
             conditionBubblesArray.value = getConditionBubblesArray()
             console.log(conditionBubblesArray.value)
@@ -84,18 +88,26 @@ const animationBubbles = async () => {
     })
     tlBubble.to('.lib-condition-bubble', {
         opacity: 1,
-        duration: 2,
-        stagger: 0.7,
+        duration: 1,
+        stagger: 0.5,
     })
     .to('.lib-condition-bubble', {
         opacity: 0,
-        duration: 2,
-        stagger: 0.7
+        duration: 1,
+        stagger: 0.5
     })
 }
 
 onMounted(() => {
     animationBubbles()
+    setTimeout(() => {
+        emit('current-animation-finish')
+    }, 7000)
+})
+
+onBeforeUnmount(() => {
+    tlBubble.kill()
+    tlBubble = null
 })
 
 
@@ -267,6 +279,7 @@ onMounted(() => {
         height: 108px;
         padding: 30px 40px;
         border: 3px solid #3692FF;
+        background-color: #fff;
         border-radius: 20px;
         display: flex;
         justify-content: space-between;

@@ -1,4 +1,13 @@
 <script setup>
+import { onMounted } from 'vue';
+
+
+const emit = defineEmits(['current-animation-finish'])
+onMounted(() => {
+    setTimeout(() => {
+        emit('current-animation-finish')
+    }, 3000)
+})
 </script>
 
 <template>

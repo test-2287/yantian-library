@@ -1,5 +1,13 @@
 <script setup>
 import YanTianMap from '@/assets/svg/full-map.svg'
+import { onMounted } from 'vue';
+
+const emit = defineEmits(['current-animation-finish'])
+onMounted(() => {
+    setTimeout(() => {
+        emit('current-animation-finish')
+    }, 3000)
+})
 
 </script>
 

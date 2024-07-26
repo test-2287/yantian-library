@@ -5,6 +5,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 import libImage from '@/assets/svg/icon-lib.svg?url'
+import { onMounted } from 'vue';
 
 const halfYearMonths = [1, 2, 3, 4, 5, 6]
 const libSwiperList = [
@@ -144,6 +145,13 @@ const getBarLength = (bookCount) => {
     // bar max width = 220px  需要拿数组中最大的值进行等比换算 或者 规定一个具体的数字
 }
 
+const emit = defineEmits(['current-animation-finish'])
+onMounted(() => {
+    setTimeout(() => {
+        emit('current-animation-finish')
+    }, 4000)
+})
+
 
 
 </script>
@@ -202,7 +210,7 @@ const getBarLength = (bookCount) => {
     height: 1216px;
     padding: 70px;
     padding-bottom: 105px;
-    background-color: #E7F2FF;
+    /* background-color: #E7F2FF; */
     position: relative;
 }
 

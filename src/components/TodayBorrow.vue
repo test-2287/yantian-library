@@ -9,6 +9,7 @@ import 'swiper/css/pagination';
 
 import { ref, nextTick, onMounted } from 'vue';
 import gsap from 'gsap';
+import { delay } from 'lodash-es';
 
 // 地图svg 各馆对应坐标
 const leftPart = [
@@ -94,8 +95,14 @@ const animationBubbles = async () => {
     })
 }
 
+const emit = defineEmits(['current-animation-finish'])
+
 onMounted(() => {
     // animationBubbles()
+
+    setTimeout(() => {
+        emit('current-animation-finish')
+    }, 4000)
 })
 
 
@@ -115,7 +122,7 @@ onMounted(() => {
 
         </div>
         <div class="borrow-data-section">
-            <swiper :pagination="true" :modules="[Pagination, Autoplay]">
+            <swiper :pagination="true" :modules="[Pagination, Autoplay]" :autoplay="{ delay: 1000 }">
                 <swiper-slide v-for="i in 3" :key="`swiper${i}`">
                     <div class="borrow-data-swiper">
                         <div class="data-item" v-for="borrowData in libBorrowArray" :key="`${borrowData.libname}`">
@@ -163,6 +170,7 @@ onMounted(() => {
         height: 650px;
         border: 4px solid #3692FF;
         border-radius: 40px;
+        background-color: #fff;
         padding: 49px;
         display: flex;
         flex-wrap: wrap;

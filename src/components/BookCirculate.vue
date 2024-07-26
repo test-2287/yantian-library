@@ -9,6 +9,7 @@ import { onMounted } from 'vue'
 import gsap from 'gsap'
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
 
+const emit = defineEmits(['current-animation-finish'])
 
 onMounted(() => {
     gsap.registerPlugin(MotionPathPlugin)
@@ -31,6 +32,11 @@ onMounted(() => {
             alignOrigin: [0.5, 0.618]
         }
     })
+
+    setTimeout(() => {
+        emit('current-animation-finish')
+    }, 3000)
+
 })
 
 

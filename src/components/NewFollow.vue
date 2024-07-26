@@ -1,6 +1,14 @@
 <script setup>
 import qrCodeService from '@/assets/svg/qrcode-service.svg';
 import qrCodeSubscribe from '@/assets/svg/qrcode-subscribe.svg';
+import { onMounted } from 'vue';
+
+const emit = defineEmits(['current-animation-finish'])
+onMounted(() => {
+    setTimeout(() => {
+        emit('current-animation-finish')
+    }, 3000)
+})
 </script>
 
 <template>

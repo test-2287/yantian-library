@@ -1,5 +1,6 @@
 <script setup>
-import BookCover from '@/assets/svg/book-cover.svg'
+import BookCover from '@/assets/svg/book-cover.svg';
+import { onMounted } from 'vue';
 
 const monthBookRank = [
     {
@@ -43,6 +44,13 @@ const monthBookRank = [
         image: ''
     },
 ]
+
+const emit = defineEmits(['current-animation-finish'])
+onMounted(() => {
+    setTimeout(() => {
+        emit('current-animation-finish')
+    }, 3000)
+})
 </script>
 
 <template>

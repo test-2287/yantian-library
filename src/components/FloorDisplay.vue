@@ -1,35 +1,12 @@
 <script setup>
-import LibFacade from './LibFacade.vue';
-import FloorOne from './FloorOne.vue';
+import LibFacade from '@/components/LibFacade.vue'
 
-import { defineComponent, onMounted, ref } from 'vue';
+const emit = defineEmits(['current-animation-finish'])
 
-defineComponent
-
-const animationOrder = {
-    LibFacade,
-    FloorOne,
+const floorAnimationFinish = () => {
+    console.log('floor animation complete');
+    emit('current-animation-finish')
 }
-const animationArray = [
-    'LibFacade',
-    'FloorOne',
-]
-
-const currentFloor = ref(0);
-
-const onAnimationUpdate = () => {
-    if (currentFloor.value === animationArray.length - 1) {
-        currentFloor.value = 0;
-    } else {
-        currentFloor.value++
-    }   
-}
-
-onMounted(() => {
-    // console.log(currentFloor.value)
-    // console.log(animationArray.value[0])
-    // console.log(animationOrder.value[animationArray.value[currentFloor.value]])
-})
 
 </script>
 
@@ -37,11 +14,7 @@ onMounted(() => {
 
     <div class="section-floors">
 
-        <LibFacade />
-        <!-- <FloorOne></FloorOne> -->
-        <!-- <component :is="animationOrder[animationArray[currentFloor]]" 
-        v-on:animation-complete="onAnimationUpdate"
-        /> -->
+        <LibFacade @floor-animation-complete="floorAnimationFinish"/>
 
     </div>
 </template>

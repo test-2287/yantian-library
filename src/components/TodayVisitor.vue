@@ -8,7 +8,7 @@ import 'swiper/css/pagination';
 
 import { onMounted } from 'vue';
 
-const svg = document.getElementById('mySvg');
+// const svg = document.getElementById('mySvg');
 // Create a rectangle element with the correct namespace
 // const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
 // rect.setAttribute('x', '10');
@@ -61,7 +61,7 @@ const heatOrange = '#FF852D'
 const heatYellow = '#FFE791'
 const bigRadius = 36
 const middleRadius = 20
-const smallRaidus = 20
+// const smallRaidus = 20
 
 const circleString = `
     <circle cx="${leftPart[0].x}" cy="${leftPart[0].y}" r="${middleRadius}" fill="${heatOrange}" />
@@ -103,6 +103,14 @@ const visitorArray = [
     },
 ]
 
+const emit = defineEmits(['current-animation-finish'])
+
+onMounted(() => {
+    setTimeout(() => {
+        emit('current-animation-finish')
+    }, 7000)
+})
+
 </script>
 
 <template>
@@ -115,7 +123,7 @@ const visitorArray = [
             <YanTianMap class="heatMap" />
         </div>
         <div class="visitor-data-section">
-            <Swiper :pagination="true" :modules="[Pagination, Autoplay]">
+            <Swiper :pagination="true" :modules="[Pagination, Autoplay]" :autoplay="{delay: 2000}">
                 <swiper-slide v-for="i in 3" :key="`swiper${i}`">
                     <div class="data-box">
                         <div class="data-item" v-for="visitorData in visitorArray" :key="visitorData.libname">
@@ -180,6 +188,7 @@ const visitorArray = [
             flex-shrink: 0;
             border-radius: 30px;
             border: 3px solid #3692FF;
+            background-color: #fff;
             margin-bottom: 40px;
             padding: 27px 37px;
             position: relative;

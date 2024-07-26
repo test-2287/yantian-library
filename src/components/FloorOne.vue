@@ -1,6 +1,6 @@
 <script setup>
 import gsap from 'gsap';
-import FloorOne from '@/assets/svg/floor-1.svg';
+// import FloorOne from '@/assets/svg/floor-1.svg';
 import WallLeft from '@/assets/svg/wall-left.svg?skipsvgo';
 import WallRight from '@/assets/svg/wall-right.svg?skipsvgo';
 import FloorPlate from '@/assets/svg/floor-plate.svg';

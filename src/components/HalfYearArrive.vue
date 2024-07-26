@@ -1,9 +1,7 @@
 <script setup>
-import { ref, reactive, onMounted } from 'vue';
-import gsap from 'gsap';
-import { shuffle as _shuffle } from 'lodash-es';
+import { ref, onMounted } from 'vue';
+// import { shuffle as _shuffle } from 'lodash-es';
 
-const tl = gsap.timeline();
 
 let arriveData = ref([
     {
@@ -58,9 +56,10 @@ let arriveData = ref([
     }
 ])
 
-const shuffle = () => {
-    arriveData.value = _shuffle(arriveData.value)
-}
+
+// const shuffle = () => {
+//     arriveData.value = _shuffle(arriveData.value)
+// }
 
 const updateData = () => {
     arriveData.value.forEach(item => {
@@ -82,33 +81,8 @@ const setBarLength = () => {
     // console.log(arriveData);
 }
 
-// const numberAnimation = (number) => {}
 
-// const fadeOutAnimation = () => {
-//     tl.to('.arrive-ranking-list', {
-//         opacity: 0
-//     })
-
-//     tl.to('.light-blue-layer', {
-//         clipPath: `ellipse(700px 700px at 1950px 530px)`
-//     })
-//     tl.to('.light-blue-layer', {
-//         clipPath: `ellipse(280px 280px at 1950px 530px)`
-//     })
-
-//     tl.to('.light-blue-layer', {
-//         opacity: 0
-//     })
-
-
-//     tl.to('.blue-layer', {
-//         clipPath: `ellipse(630px 630px at right)`,
-//         duration: 1.5
-//     })
-//     tl.to('.blue-layer', {
-//         opacity: 0
-//     })
-// }
+const emit = defineEmits(['current-animation-finish'])
 
 onMounted(() => {
     // setBarLength()
@@ -118,6 +92,10 @@ onMounted(() => {
         updateData()
         sortData()
     }, 3000)
+
+    setTimeout(() => {
+        emit('current-animation-finish')
+    }, 5000)
 })
 
 

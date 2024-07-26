@@ -1,9 +1,6 @@
 <script setup>
-// import { RouterLink, RouterView } from 'vue-router'
-// import HelloWorld from './components/HelloWorld.vue'
-
 import FloorDisplay from './components/FloorDisplay.vue';
-import LibTemperature from './components/LibTemperature.vue';
+// import LibTemperature from './components/LibTemperature.vue';
 import HalfYearArrive from './components/HalfYearArrive.vue'
 import MonthBookStatus from './components/MonthBookStatus.vue'
 import MonthBookRank from './components/MonthBookRank.vue'
@@ -20,39 +17,13 @@ import IconNoticeBubble from '@/assets/svg/bubble-yellow.svg';
 import ImageQRCode from '@/assets/svg/index-qrcode.svg';
 import ImageEvent from '@/assets/svg/index-event-image.svg';
 
-import { ref, onMounted, computed } from 'vue';
+import { ref, nextTick } from 'vue';
 import { eachDayOfInterval, endOfMonth, endOfWeek, format, isSameMonth, isToday, startOfMonth, startOfWeek } from 'date-fns';
+import { throttle, debounce } from 'lodash-es';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Pagination, Autoplay } from 'swiper/modules';
 
-// const animationOrder = {
-//   FloorDisplay,
-//   LibTemperature,
-//   HalfYearArrive,
-//   MonthBookStatus,
-//   MonthBookRank,
-//   TodayVisitor,
-//   TodayLibCondition,
-//   TodayBorrow,
-//   NewUser,
-//   NewFollow,
-//   BookCirculate,
-//   TopBorrower,
-// }
 
-// const animationArray = [
-//   'FloorDisplay',  //0
-//   'TodayLibCondition', //1
-//   'TodayVisitor', //2
-//   'HalfYearArrive', //3
-//   'TodayBorrow', //4
-//   'MonthBookStatus', //5
-//   'NewUser', //6
-//   'TopBorrower', //7
-//   'NewFollow', //8
-//   'MonthBookRank', //9
-//   'BookCirculate' //10
-// ]
 
 const animationOrder = [
   FloorDisplay,  //0
@@ -88,25 +59,86 @@ days.forEach(day => {
 
 const isLibOpen = ref(true)  // 闭馆为flase
 
-// console.log(animationOrder[curAnimation.value]);
+const videoRef = ref(null)
+const isPlay = ref(false)
+const videoToggle = () => {
+  if (!isPlay.value) {
+    videoRef.value.play()
+    isPlay.value = true
+    console.log('play')
+  } else {
+    videoRef.value.pause()
+    isPlay.value = false
+    console.log('pause')
+  }
+}
+
+const playVideo = () => {
+  
+  console.log('play the video')
+  if (curAnimationIndex.value == 0) {
+    videoRef.value.currentTime = 0
+  }
+  videoRef.value.play()
+}
+
+const showVideo = ref(false)
+const playNext = async () => {
+
+  curAnimation.value = -1
+
+  if (curAnimationIndex.value == 0) {
+    showVideo.value = true
+  }
+  if (curAnimationIndex.value == 9) {
+    curAnimation.value = curAnimationIndex.value = 10
+    return
+  }
+  if (curAnimationIndex.value == 10) {
+    curAnimation.value = curAnimationIndex.value = 0
+    currentPause.value = 0
+    showVideo.value = false
+    return
+  }
+
+  await nextTick();
+  playVideo();
+
+}
+
+let curAnimationIndex = ref(0)
+let currentPause = ref(0)
+const pauseTimeArray = [6.5, 7.5, 13, 14.4, 14.8, 20.5, 25.5, 30, 36]
+
+const checkPause = () => {
+  if (currentPause.value <= 8 && videoRef.value.currentTime >= pauseTimeArray[currentPause.value]) {
+    videoRef.value.pause()
+    console.log(videoRef.value.currentTime)
+    currentPause.value += 1
+    
+    if (curAnimationIndex.value <= 0) {
+      curAnimation.value = curAnimationIndex.value = 1
+
+      return
+    } else if (curAnimationIndex.value > 0 && curAnimationIndex.value < 9) {
+      curAnimationIndex.value += 1
+      curAnimation.value = curAnimationIndex.value
+
+      return
+    } 
+    // else if() {
+
+    // }
+
+  }
+}
+
+
+
 
 </script>
 
 <template>
-  <!-- <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView /> -->
 
   <div class="homepage">
 
@@ -167,7 +199,7 @@ const isLibOpen = ref(true)  // 闭馆为flase
         <div class="qrcode-box">
           <div class="header">读者之星</div>
           <div class="qrcode-image-box">
-            <ImageQRCode class="qrcode" />
+            <ImageQRCode class="qrcode" @click="videoToggle" />
           </div>
         </div>
 
@@ -176,12 +208,16 @@ const isLibOpen = ref(true)  // 闭馆为flase
     </div>
 
     <div class="section-main">
-      <!-- <FloorDisplay /> -->
-      <!-- <component :is="animationOrder[animationArray[curAnimation]]" /> -->
-      <component :is="animationOrder[curAnimation]" />
+      <video ref="videoRef" width="2800" height="1216" class="background-video" @timeupdate="checkPause" v-show="showVideo" muted>
+        <source src="@/assets/background-animation.mp4">
+      </video>
+
+      <component :is="animationOrder[curAnimation]" @current-animation-finish="playNext" v-show="curAnimation != -1" />
     </div>
 
     <div class="section-notice">
+
+      <!-- <div class="video-test" @click="videoToggle">video toggle</div> -->
 
       <div class="notice-container">
 
@@ -237,69 +273,7 @@ const isLibOpen = ref(true)  // 闭馆为flase
   </div>
 </template>
 
-<style scoped>
-/* header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-} */
-
+<style scoped lang="scss">
 .homepage {
   width: 4864px;
   height: 1216px;
@@ -315,8 +289,19 @@ nav a:first-of-type {
 }
 
 .section-main {
-  width: 2828px;
+  width: 2800px;
   height: 1216px;
+  position: relative;
+}
+
+.background-video {
+  position: absolute;
+  /* width: 2828px; */
+  height: 1216px;
+  object-fit: cover;
+  z-index: -1;
+  left: 0;
+  top: 0
 }
 
 .section-event {
