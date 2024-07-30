@@ -5,6 +5,7 @@ import FacadeCloud from '@/assets/svg/cloud.svg';
 import Floor from '@/assets/svg/floor.svg';
 import FloorB1 from '@/assets/svg/floor-b1.svg';
 import FloorF1 from '@/assets/svg/floor-f1.svg';
+import FloorF2 from '@/assets/svg/floor-f2.svg';
 import FloorF3 from '@/assets/svg/floor-f3.svg';
 import WallLeft from '@/assets/svg/wall-left.svg?skipsvgo';
 import WallRight from '@/assets/svg/wall-right.svg?skipsvgo';
@@ -43,7 +44,7 @@ const tlB1 = () => {
         opacity: 0,
         x: -465,
     })
-    
+
     gsap.set('.lib-logo', {
         opacity: 0,
         x: -260
@@ -263,11 +264,11 @@ const tlB1 = () => {
                     y: -20,
                     duration: 1,
                     onComplete: () => {
-                        // tlF1()
-                        // currentFloor.value = 1
+                        tlF1()
+                        currentFloor.value = 1
 
-                        tlF3()
-                        currentFloor.value = 3
+                        // tlF3()
+                        // currentFloor.value = 3
                     }
                 })
             }
@@ -356,8 +357,8 @@ const tlF1 = () => {
     tl.eventCallback('onComplete', () => {
         tl.tweenTo('start', {
             onComplete: () => {
-                tlF3()
-                currentFloor.value = 3
+                tlF2()
+                currentFloor.value = 2
             }
         })
     })
@@ -388,8 +389,17 @@ const tlF2 = () => {
         opacity: 0,
         y: 100
     })
+    gsap.set('.floor-section-bubble.f2', {
+        opacity: 0,
+        scale: 0,
+        transformOrigin: 'right bottom'
+    })
+    gsap.set('.current-floor-condition .condition-box', {
+        opacity: 0,
+        x: 530
+    })
 
-    tl.to('.floor-f1', {
+    tl.to('.floor-f2', {
         opacity: 1,
         y: 0,
         duration: 2
@@ -414,6 +424,23 @@ const tlF2 = () => {
         y: 0,
         duration: 1.5
     })
+
+    tl.to('.current-floor-condition .condition-box', {
+        opacity: 1,
+        x: 0,
+        duration: 1,
+        stagger: 0.5
+    })
+
+    tl.to('.floor-section-bubble.f2', {
+        opacity: 1,
+        scale: 1,
+        duration: 0.5,
+        stagger: 0.5,
+        transformOrigin: 'right bottom'
+    })
+
+    tl.addPause('+=1')
 
     tl.eventCallback('onComplete', () => {
         tl.tweenTo('start', {
@@ -505,7 +532,7 @@ const tlF3 = () => {
 
     tl.eventCallback('onComplete', () => {
         tl.tweenTo('start', {
-            
+
             onComplete: () => {
                 gsap.to('.lib-logo', {
                     opacity: 0,
@@ -554,7 +581,6 @@ const showFloorText = () => {
 
 onMounted(() => {
     tlB1()
-    // tlF1()
     // setTimeout(() => {
     //     emit('floor-animation-complete')
     // }, 3000)
@@ -655,7 +681,7 @@ onMounted(() => {
             <WallRight class="wall-right" />
             <FloorB1 class="floor-b1" />
             <FloorF1 class="floor-f1" />
-            <!-- <FloorF1 class="floor-f2" /> -->
+            <FloorF2 class="floor-f2" />
             <FloorF3 class="floor-f3" />
 
             <FloorPlate class="floor-indicator-plate" />
@@ -708,6 +734,22 @@ onMounted(() => {
                 <div class="content"></div>
             </div>
             <!-- f2气泡 -->
+            <div class="floor-section-bubble f2 f2-1">
+                <div class="label">工具书</div>
+                <div class="content"></div>
+            </div>
+            <div class="floor-section-bubble f2 f2-2">
+                <div class="label">海洋类图书</div>
+                <div class="content"></div>
+            </div>
+            <div class="floor-section-bubble f2 f2-3">
+                <div class="label">社科综合图书</div>
+                <div class="content"></div>
+            </div>
+            <div class="floor-section-bubble f2 f2-4">
+                <div class="label">体验区</div>
+                <div class="content"></div>
+            </div>
             <!-- f3气泡 -->
             <div class="floor-section-bubble f3 f3-1">
                 <div class="label">视听播放室</div>
@@ -997,9 +1039,9 @@ onMounted(() => {
     opacity: 0;
 }
 
-.floor-f3 {
-    /* opacity: 1; */
-}
+/* .floor-f2 {
+    opacity: 1;
+} */
 
 .wall-left,
 .wall-right {
@@ -1136,8 +1178,25 @@ onMounted(() => {
         top: 537px;
         left: 340px;
     }
-
-    /*  */
+    /* &.f2 {
+        opacity: 1;
+    } */
+    &.f2-1 {
+        top: 757px;
+        left: 320px;
+    }
+    &.f2-2 {
+        top: 350px;
+        left: 50px;
+    }
+    &.f2-3 {
+        top: 240px;
+        left: 570px;
+    }
+    &.f2-4 {
+        top: 838px;
+        left: 960px;
+    }
 
     &.f3-1 {
         top: 773px;
