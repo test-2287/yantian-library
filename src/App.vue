@@ -52,9 +52,14 @@ days.forEach(day => {
     date: format(day, 'd'),
     isCurrentMonth: isSameMonth(day, today),
     isToday: isToday(day),
-    // hasEvent: true   // 如果当日有活动需要加上这个字段
+    eventNum: 3 
+    // hasNewEvent: true // 如果当日有新活动需要加上这个字段
   })
 })
+
+
+formatDays[15].hasNewEvent = true
+formatDays[18].hasNewEvent = true
 
 
 const isLibOpen = ref(true)  // 闭馆为flase
@@ -145,7 +150,11 @@ const checkPause = () => {
     <div class="section-event">
 
       <div class="calendar-section">
-        <span class="notes">*深色当天有活动</span>
+        <div class="notes">
+          <span class="green">当天有活动进行中</span>
+          <span class="orange">当天有新活动开始</span>
+        </div>
+        
         <div class="title-box">6月活动新日历</div>
         <div class="calendar">
           <div class="calendar-header">
@@ -158,11 +167,10 @@ const checkPause = () => {
             <div>周日</div>
           </div>
           <div class="calendar-grid" ref="calendarRef">
-            <!-- 如果有活动 -->
-            <div class="date-box" :class="{ event: day.hasEvent }" v-for="(day, index) in formatDays"
+            <div class="date-box" :class="{ istoday: day.isToday }" v-for="(day, index) in formatDays"
               :key="`day${index}`">
               <template v-if="day.isCurrentMonth"> {{ day.date }} </template>
-              <span class="today" v-if="day.isToday">今</span>
+              <span class="event" :class="{new: day.hasNewEvent}" v-if="day.eventNum && day.isCurrentMonth">{{day.eventNum}}</span>
             </div>
           </div>
         </div>
@@ -330,9 +338,29 @@ const checkPause = () => {
     top: -50px;
     right: 0;
     font-size: 24px;
-    font-weight: 500;
     line-height: 34.75px;
     color: #3692FF;
+    display: flex;
+    align-items: center;
+    > span {
+      display: flex;
+      align-items: center;
+      margin-left: 10px;
+      font-weight: 600;
+      &::before {
+        content: '';
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+      &.green::before {
+        background-color: #68C945;
+      }
+      &.orange::before {
+        background-color: #FF852D
+      }
+    }
   }
 
   .title-box {
@@ -388,25 +416,28 @@ const checkPause = () => {
       color: #3692FF;
       font-weight: 600;
 
-      &.event {
+      &.istoday {
         background-color: #88BFFF;
         color: #fff;
       }
 
-      .today {
+      .event {
         position: absolute;
         top: -10px;
         left: -9px;
         width: 30px;
         height: 30px;
         border-radius: 50%;
-        background-color: #FF852D;
+        background-color: #68C945;
         display: flex;
         justify-content: center;
         align-items: center;
         color: #fff;
         font-size: 20px;
         line-height: 29px;
+        &.new {
+          background-color: #FF852D;
+        }
       }
     }
   }
