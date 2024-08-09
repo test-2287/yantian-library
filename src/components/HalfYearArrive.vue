@@ -53,6 +53,26 @@ let arriveData = ref([
         id: 9,
         name: '沙头角街道图书馆',
         number: 569
+    },
+    {
+        id: 10,
+        name: '沙头角街道图书馆',
+        number: 569
+    },
+    {
+        id: 11,
+        name: '沙头角街道图书馆',
+        number: 569
+    },
+    {
+        id: 12,
+        name: '沙头角街道图书馆',
+        number: 569
+    },
+    {
+        id: 13,
+        name: '沙头角街道图书馆',
+        number: 569
     }
 ])
 
@@ -169,17 +189,22 @@ onMounted(() => {
 
 .arrive-ranking-list {
     width: 1600px;
-    /* height: 960px; */
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     right: 200px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 1160px;
 }
 
 .arrive-item {
     width: 1600px;
     height: 60px;
-    margin-bottom: 40px;
+    /* margin-bottom: 40px; */
     display: flex;
 
 }
