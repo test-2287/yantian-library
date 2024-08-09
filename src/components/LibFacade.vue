@@ -598,6 +598,7 @@ onMounted(() => {
         </div>
 
         <div class="floor-left-text">
+            <div class="floor-text" :class="{ current: currentFloor == 3 }">4F</div>
             <div class="floor-text" :class="{ current: currentFloor == 3 }">3F</div>
             <div class="floor-text" :class="{ current: currentFloor == 2 }">2F</div>
             <div class="floor-text" :class="{ current: currentFloor == 1 }">1F</div>
@@ -819,7 +820,7 @@ onMounted(() => {
     width: 205px;
     height: 329px;
     left: 85px;
-    top: 369px;
+    top: 320px;
     opacity: 0;
 
 

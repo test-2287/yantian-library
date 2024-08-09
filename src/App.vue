@@ -181,8 +181,9 @@ const checkPause = () => {
         <Swiper :modules="[Autoplay]">
           <swiper-slide v-for="i in 3" :key="`event${i}`">
             <div class="event-box">
-              <div class="left">
+              <div class="left"> 
                 <ImageEvent />
+                <!-- <img src="@/assets/svg/index-event-image.svg?url" alt=""> -->
               </div>
               <div class="right">
                 <div class="event-title">团体招聘 | 探索海洋秘境，预约珊瑚科普之旅</div>
@@ -478,10 +479,15 @@ const checkPause = () => {
 
   .left {
     flex-shrink: 0;
-    width: 340px;
+    max-width: 340px;
     height: 250px;
     border-radius: 20px;
     margin-right: 25px;
+
+    > img {
+      max-width: 340px;
+      max-height: 250px;
+    }
 
   }
 
