@@ -257,22 +257,38 @@ const tlB1 = () => {
     tl.addPause('+=1')
 
     tl.eventCallback('onComplete', () => {
-        tl.tweenTo('showFloor', {
-            onComplete: () => {
-                gsap.to('.floor-b1', {
-                    opacity: 0,
-                    y: -20,
-                    duration: 1,
-                    onComplete: () => {
-                        tlF1()
-                        currentFloor.value = 1
+        // tl.tweenTo('showFloor', {
+        //     onComplete: () => {
+        //         gsap.to('.floor-b1', {
+        //             opacity: 0,
+        //             y: -20,
+        //             duration: 1,
+        //             onComplete: () => {
+        //                 tlF1()
+        //                 currentFloor.value = 1
 
-                        // tlF3()
-                        // currentFloor.value = 3
-                    }
-                })
+        //                 // tlF3()
+        //                 // currentFloor.value = 3
+        //             }
+        //         })
+        //     }
+        // })
+
+        gsap.to(['.floor-section-bubble.b1',
+            '.current-floor-condition .condition-box',
+            '.floor-indicator-text.b1',
+            '.floor-indicator-plate',
+            '.wall-right',
+            '.wall-left',
+            '.floor-b1'], {
+            opacity: 0,
+            duration: 1,
+            onComplete: () => {
+                tlF1()
+                currentFloor.value = 1
             }
         })
+
     })
 }
 
@@ -355,7 +371,22 @@ const tlF1 = () => {
     tl.addPause('+=1')
 
     tl.eventCallback('onComplete', () => {
-        tl.tweenTo('start', {
+        // tl.tweenTo('start', {
+        //     onComplete: () => {
+        //         tlF2()
+        //         currentFloor.value = 2
+        //     }
+        // })
+
+        gsap.to(['.floor-section-bubble.f1',
+            '.current-floor-condition .condition-box',
+            '.floor-indicator-text.f1',
+            '.floor-indicator-plate',
+            '.wall-right',
+            '.wall-left',
+            '.floor-f1'], {
+            opacity: 0,
+            duration: 1,
             onComplete: () => {
                 tlF2()
                 currentFloor.value = 2
@@ -443,7 +474,22 @@ const tlF2 = () => {
     tl.addPause('+=1')
 
     tl.eventCallback('onComplete', () => {
-        tl.tweenTo('start', {
+        // tl.tweenTo('start', {
+        //     onComplete: () => {
+        //         tlF3()
+        //         currentFloor.value = 3
+        //     }
+        // })
+
+        gsap.to(['.floor-section-bubble.f2',
+            '.current-floor-condition .condition-box',
+            '.floor-indicator-text.f2',
+            '.floor-indicator-plate',
+            '.wall-right',
+            '.wall-left',
+            '.floor-f2'], {
+            opacity: 0,
+            duration: 1,
             onComplete: () => {
                 tlF3()
                 currentFloor.value = 3
@@ -531,24 +577,41 @@ const tlF3 = () => {
     tl.addPause('+=1')
 
     tl.eventCallback('onComplete', () => {
-        tl.tweenTo('start', {
+        // tl.tweenTo('start', {
 
+        //     onComplete: () => {
+        //         gsap.to('.lib-logo', {
+        //             opacity: 0,
+        //             duration: 1
+        //         })
+        //         gsap.to('.floor-title-box', {
+        //             opacity: 0,
+        //             duration: 1
+        //         }, '<')
+        //         gsap.to('.floor-left-text', {
+        //             opacity: 0,
+        //             duration: 1
+        //         }, '<')
+
+
+        //         // 切换下一个页面
+        //         emit('floor-animation-complete')
+        //     }
+        // })
+
+        gsap.to(['.floor-section-bubble.f3',
+            '.current-floor-condition .condition-box',
+            '.floor-indicator-text.f3',
+            '.floor-indicator-plate',
+            '.wall-right',
+            '.wall-left',
+            '.floor-f3', 
+            '.lib-logo', 
+            '.floor-title-box', 
+            '.floor-left-text'], {
+            opacity: 0,
+            duration: 1,
             onComplete: () => {
-                gsap.to('.lib-logo', {
-                    opacity: 0,
-                    duration: 1
-                })
-                gsap.to('.floor-title-box', {
-                    opacity: 0,
-                    duration: 1
-                }, '<')
-                gsap.to('.floor-left-text', {
-                    opacity: 0,
-                    duration: 1
-                }, '<')
-
-
-                // 切换下一个页面
                 emit('floor-animation-complete')
             }
         })
@@ -598,7 +661,7 @@ onMounted(() => {
         </div>
 
         <div class="floor-left-text">
-            <div class="floor-text" :class="{ current: currentFloor == 3 }">4F</div>
+            <div class="floor-text" :class="{ current: currentFloor == 4 }">4F</div>
             <div class="floor-text" :class="{ current: currentFloor == 3 }">3F</div>
             <div class="floor-text" :class="{ current: currentFloor == 2 }">2F</div>
             <div class="floor-text" :class="{ current: currentFloor == 1 }">1F</div>
@@ -1179,6 +1242,7 @@ onMounted(() => {
         top: 537px;
         left: 340px;
     }
+
     /* &.f2 {
         opacity: 1;
     } */
@@ -1186,14 +1250,17 @@ onMounted(() => {
         top: 757px;
         left: 320px;
     }
+
     &.f2-2 {
         top: 350px;
         left: 50px;
     }
+
     &.f2-3 {
         top: 240px;
         left: 570px;
     }
+
     &.f2-4 {
         top: 838px;
         left: 960px;
