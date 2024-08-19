@@ -5,6 +5,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 import libImage from '@/assets/svg/icon-lib.svg?url'
+import Guanhai from '@/assets/svg/guanhai.svg?url'
 import { onMounted } from 'vue';
 
 const halfYearMonths = [1, 2, 3, 4, 5, 6]
@@ -109,7 +110,7 @@ const libSwiperList = [
         libname: '灯塔图书馆',
         borrow: 12394,
         return: 12944,
-        image: libImage,
+        image: Guanhai,
         monthsData: [
             {
                 borrow: 200,
@@ -312,6 +313,7 @@ onMounted(() => {
         width: 350px;
         background-position: center;
         background-repeat: no-repeat;
+        background-size: contain;
     }
 }
 
