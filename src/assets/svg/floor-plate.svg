@@ -1,0 +1,16 @@
+<svg width="351" height="270" viewBox="0 0 351 270" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<rect width="200" height="200" transform="matrix(0.866025 0.5 -0.866025 0.5 175.205 70)" fill="url(#pattern0_136_1677)"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M175.205 2L348.41 102V117L175.205 17V2Z" fill="#3692FF" stroke="#3692FF" stroke-width="3" stroke-linejoin="round"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M348.41 102L175.205 202V217L348.41 117V102Z" fill="#3692FF" stroke="#3692FF" stroke-width="3" stroke-linejoin="round"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M175.205 202L2 102V117L175.205 217V202Z" fill="#3692FF" stroke="#3692FF" stroke-width="3" stroke-linejoin="round"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M2 102L175.205 2V17L2 117V102Z" fill="#3692FF" stroke="#3692FF" stroke-width="3" stroke-linejoin="round"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M175.205 2V17V2Z" fill="#3692FF"/>
+<path d="M175.205 2V2ZM175.205 2V17M175.205 17V17Z" stroke="#3692FF" stroke-width="3" stroke-linejoin="round"/>
+<rect width="200" height="200" transform="matrix(0.866025 0.5 -0.866025 0.5 175.205 2)" fill="#FFE791" stroke="#3692FF" stroke-width="3" stroke-linejoin="round"/>
+<defs>
+<pattern id="pattern0_136_1677" patternContentUnits="objectBoundingBox" width="0.06" height="0.06">
+<use xlink:href="#image0_136_1677" transform="scale(0.0015)"/>
+</pattern>
+<image id="image0_136_1677" width="40" height="40" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAEgSURBVHgB7ZfBTQMxEEX/jBDiSAlbQjoAbhEnSiCigFBKUgAKJXBCuZF0QAkugXMkMniijcSFYIm/EyLNk9a7q/2Hb3s99hf03C3scgNMzXANvxzBuxjmrw/yjCMh3owX1skWb/Wx+0FXTHGznEhBMOrNL+acXQd8lBGM3j7ZPQ6b29NttnhEMFonedoqNsEVgtG6KEbN6v3iCUTxz/EpXjWra9lBMFrr3LpVXH+HOYLRc8Ws3kuDtiyPULD1ZSIfXoRx2GTpNeHI95dxrYkqu+1u1H9d2SfWF2eYeUeQJEmShCMYCFbGGcQgM+MMch5kZhy6QXbG4Y8gOePQDbIzzglkEjbkjEM3yM44dIPsjEM3yM44g211TmacJEmSv/MF/MR8K5mEp6oAAAAASUVORK5CYII="/>
+</defs>
+</svg>
