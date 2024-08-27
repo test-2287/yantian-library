@@ -17,10 +17,10 @@ import IconNoticeBubble from '@/assets/svg/bubble-yellow.svg';
 import ImageQRCode from '@/assets/svg/index-qrcode.svg';
 import ImageEvent from '@/assets/svg/index-event-image.svg';
 
-import { ref, nextTick } from 'vue';
+import { ref, nextTick, onMounted } from 'vue';
 import { eachDayOfInterval, endOfMonth, endOfWeek, format, isSameMonth, isToday, startOfMonth, startOfWeek } from 'date-fns';
 import { throttle, debounce } from 'lodash-es';
-import { Swiper, SwiperSlide } from 'swiper/vue';
+import { Swiper, SwiperSlide, useSwiper } from 'swiper/vue';
 import { Pagination, Autoplay } from 'swiper/modules';
 
 
@@ -52,7 +52,7 @@ days.forEach(day => {
     date: format(day, 'd'),
     isCurrentMonth: isSameMonth(day, today),
     isToday: isToday(day),
-    eventNum: 3 
+    eventNum: 3
     // hasNewEvent: true // 如果当日有新活动需要加上这个字段
   })
 })
@@ -79,7 +79,7 @@ const videoToggle = () => {
 }
 
 const playVideo = () => {
-  
+
   console.log('play the video')
   if (curAnimationIndex.value == 0) {
     videoRef.value.currentTime = 0
@@ -120,7 +120,7 @@ const checkPause = () => {
     videoRef.value.pause()
     console.log(videoRef.value.currentTime)
     currentPause.value += 1
-    
+
     if (curAnimationIndex.value <= 0) {
       curAnimation.value = curAnimationIndex.value = 1
 
@@ -130,7 +130,7 @@ const checkPause = () => {
       curAnimation.value = curAnimationIndex.value
 
       return
-    } 
+    }
     // else if() {
 
     // }
@@ -139,6 +139,54 @@ const checkPause = () => {
 }
 
 
+
+let activeNoticeSlide = 0
+const noticeSwiper = ref(null)
+
+const scrollContent =  (activeNoticeSlide) => {
+  let contentScrollTimer = null
+
+  const contentDom = document.querySelector(`.notice-content-box-${activeNoticeSlide}`)
+  const contentParent = contentDom.parentElement
+  const contentHeight = contentDom.clientHeight
+  const parentHeight = contentParent.clientHeight
+
+  let scroll = 0
+  if (contentHeight > parentHeight) {
+    contentScrollTimer = setInterval(async () => {
+      if (scroll + parentHeight < contentHeight) {
+        contentParent.scrollTop = scroll++
+      } else {
+        contentParent.scrollTop = contentDom.scrollHeight
+        clearInterval(contentScrollTimer)
+
+        activeNoticeSlide++
+        if (activeNoticeSlide > 3) {
+          activeNoticeSlide = 0
+        }
+
+        await nextTick(() => {
+          noticeSwiper.value.$el.swiper.slideTo(activeNoticeSlide)
+          scrollContent(activeNoticeSlide)
+        })
+      }
+    }, 100)
+  } else {
+    activeNoticeSlide++;
+    if (activeNoticeSlide > 3) {
+      activeNoticeSlide = 0
+    }
+    setTimeout(() => {
+      noticeSwiper.value.$el.swiper.slideTo(activeNoticeSlide)
+      scrollContent(activeNoticeSlide)
+    }, 2000)
+
+  }
+}
+
+onMounted(() => {
+  scrollContent(activeNoticeSlide)
+})
 
 
 </script>
@@ -154,7 +202,7 @@ const checkPause = () => {
           <span class="green">当天有活动进行中</span>
           <span class="orange">当天有新活动开始</span>
         </div>
-        
+
         <div class="title-box">6月活动新日历</div>
         <div class="calendar">
           <div class="calendar-header">
@@ -170,7 +218,8 @@ const checkPause = () => {
             <div class="date-box" :class="{ istoday: day.isToday }" v-for="(day, index) in formatDays"
               :key="`day${index}`">
               <template v-if="day.isCurrentMonth"> {{ day.date }} </template>
-              <span class="event" :class="{new: day.hasNewEvent}" v-if="day.eventNum && day.isCurrentMonth">{{day.eventNum}}</span>
+              <span class="event" :class="{ new: day.hasNewEvent }"
+                v-if="day.eventNum && day.isCurrentMonth">{{ day.eventNum }}</span>
             </div>
           </div>
         </div>
@@ -181,7 +230,7 @@ const checkPause = () => {
         <Swiper :modules="[Autoplay]">
           <swiper-slide v-for="i in 3" :key="`event${i}`">
             <div class="event-box">
-              <div class="left"> 
+              <div class="left">
                 <ImageEvent />
                 <!-- <img src="@/assets/svg/index-event-image.svg?url" alt=""> -->
               </div>
@@ -217,7 +266,8 @@ const checkPause = () => {
     </div>
 
     <div class="section-main">
-      <video ref="videoRef" width="2800" height="1216" class="background-video" @timeupdate="checkPause" v-show="showVideo" muted>
+      <video ref="videoRef" width="2800" height="1216" class="background-video" @timeupdate="checkPause"
+        v-show="showVideo" muted>
         <source src="@/assets/background-animation.mp4">
       </video>
 
@@ -233,8 +283,8 @@ const checkPause = () => {
         <div class="title-box">通知公告</div>
 
         <template v-if="isLibOpen">
-          <swiper :modules="[Pagination, Autoplay]" :pagination="{ type: 'fraction' }">
-            <swiper-slide v-for="i in 4" :key="`notice${i}`">
+          <swiper :modules="[Pagination, Autoplay]" :pagination="{ type: 'fraction' }" ref="noticeSwiper">
+            <swiper-slide v-for="(i, index) in 4" :key="`notice${i}`">
               <div class="notice-box">
                 <div class="notice-header">
                   <div class="header-left notice-date-box">
@@ -244,11 +294,13 @@ const checkPause = () => {
                   <div class="notice-title">栖息图书馆获评2023年度深圳十佳共享艺文空间</div>
                 </div>
                 <div class="notice-content">
-                  栖息图书馆是深圳市盐田区图书馆是“海书房”之一，占地281.1㎡。外观造型以传统欧式风格奠定基调，融合现代简约风格，以白色为主色调，整体营造了“圣洁、高雅、开放、通透”的文化殿堂氛围。
-                  <br>
-                  洁白的纱幔搭配大落地窗，在阳光的照耀下，整个图书馆都显得高雅了起来。
-                  <br>
-                  栖息图书馆是深圳市盐田区图书馆是“海书房”之一，占地281.1㎡。外观造型以传统欧式风格奠定基调，融合现代简约风格，以白色为主色调，整体营造了“圣洁、高雅、开放、通透”的文化殿堂氛围。栖息图书馆是深圳市盐田区图书馆是“海书房”之一，占地281.1㎡。外观造型以传统欧式风格奠定基调，融合现代简约风格，以白色为主色调，整体营造了“圣洁、高雅、开放、通透”的文化殿堂氛围。栖息图书馆是深圳市盐田区图书馆是“海书房”之一，占地281.1㎡。外观造型以传统欧式风格奠定基调，融合现代简约风格，以白色为主色调，整体营造了“圣洁、高雅、开放、通透”的文化殿堂氛围。
+                  <div :class="`notice-content-box-${index}`">
+                    栖息图书馆是深圳市盐田区图书馆是“海书房”之一，占地281.1㎡。外观造型以传统欧式风格奠定基调，融合现代简约风格，以白色为主色调，整体营造了“圣洁、高雅、开放、通透”的文化殿堂氛围。
+                    <br>
+                    洁白的纱幔搭配大落地窗，在阳光的照耀下，整个图书馆都显得高雅了起来。
+                    <br>
+                    栖息图书馆是深圳市盐田区图书馆是“海书房”之一，占地281.1㎡。外观造型以传统欧式风格奠定基调，融合现代简约风格，以白色为主色调，整体营造了“圣洁、高雅、开放、通透”的文化殿堂氛围。栖息图书馆是深圳市盐田区图书馆是“海书房”之一，占地281.1㎡。外观造型以传统欧式风格奠定基调，融合现代简约风格，以白色为主色调，整体营造了“圣洁、高雅、开放、通透”的文化殿堂氛围。栖息图书馆是深圳市盐田区图书馆是“海书房”之一，占地281.1㎡。外观造型以传统欧式风格奠定基调，融合现代简约风格，以白色为主色调，整体营造了“圣洁、高雅、开放、通透”的文化殿堂氛围。
+                  </div>
                 </div>
               </div>
             </swiper-slide>
@@ -343,11 +395,13 @@ const checkPause = () => {
     color: #3692FF;
     display: flex;
     align-items: center;
-    > span {
+
+    >span {
       display: flex;
       align-items: center;
       margin-left: 10px;
       font-weight: 600;
+
       &::before {
         content: '';
         width: 24px;
@@ -355,9 +409,11 @@ const checkPause = () => {
         border-radius: 50%;
         margin-right: 10px;
       }
+
       &.green::before {
         background-color: #68C945;
       }
+
       &.orange::before {
         background-color: #FF852D
       }
@@ -436,6 +492,7 @@ const checkPause = () => {
         color: #fff;
         font-size: 20px;
         line-height: 29px;
+
         &.new {
           background-color: #FF852D;
         }
@@ -484,7 +541,7 @@ const checkPause = () => {
     border-radius: 20px;
     margin-right: 25px;
 
-    > img {
+    >img {
       max-width: 340px;
       max-height: 250px;
     }
@@ -660,6 +717,12 @@ const checkPause = () => {
 
       max-height: 536px;
       overflow: scroll;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none
+      }
+
 
     }
 
