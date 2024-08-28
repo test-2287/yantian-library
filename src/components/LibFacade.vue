@@ -112,30 +112,31 @@ const tlB1 = () => {
 
     tl.to('.road', {
         opacity: 1,
-        duration: 3,
+        duration: 2,
     })
     tl.to('.tree', {
         opacity: 1,
         scale: 1,
         transformOrigin: 'center bottom',
-        stagger: 0.8,
-        duration: 3,
+        // stagger: 0.8,
+        duration: 2,
     }, '<')
 
     tl.to('.lib-condition .condition-box', {
         opacity: 1,
         x: 0,
-        duration: 1.5,
+        duration: 1,
         stagger: 0.5,
     })
 
     tl.to('.cloud1', {
-        opacity: 1
+        opacity: 1,
+        duration: 1
     }, '<')
     tl.to('.cloud1', {
         x: -150,
         y: 100,
-        duration: 2
+        duration: 1.5
     })
     tl.to('.cloud2', {
         opacity: 1,
@@ -250,11 +251,11 @@ const tlB1 = () => {
         opacity: 1,
         scale: 1,
         duration: 0.5,
-        stagger: 0.5,
+        // stagger: 0.5,
         transformOrigin: 'right bottom'
     })
 
-    tl.addPause('+=1')
+    tl.addPause('+=2')
 
     tl.eventCallback('onComplete', () => {
         // tl.tweenTo('showFloor', {
@@ -364,11 +365,11 @@ const tlF1 = () => {
         opacity: 1,
         scale: 1,
         duration: 0.5,
-        stagger: 0.5,
+        // stagger: 0.5,
         transformOrigin: 'right bottom'
     })
 
-    tl.addPause('+=1')
+    tl.addPause('+=2')
 
     tl.eventCallback('onComplete', () => {
         // tl.tweenTo('start', {
@@ -467,11 +468,11 @@ const tlF2 = () => {
         opacity: 1,
         scale: 1,
         duration: 0.5,
-        stagger: 0.5,
+        // stagger: 0.5,
         transformOrigin: 'right bottom'
     })
 
-    tl.addPause('+=1')
+    tl.addPause('+=2')
 
     tl.eventCallback('onComplete', () => {
         // tl.tweenTo('start', {
@@ -570,11 +571,11 @@ const tlF3 = () => {
         opacity: 1,
         scale: 1,
         duration: 0.5,
-        stagger: 0.5,
+        // stagger: 0.5,
         transformOrigin: 'right bottom'
     })
 
-    tl.addPause('+=1')
+    tl.addPause('+=2')
 
     tl.eventCallback('onComplete', () => {
         // tl.tweenTo('start', {
