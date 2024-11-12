@@ -56,7 +56,8 @@ onMounted(() => {
 .map-section {
     position: absolute;
     top: 125px;
-    left: 1056px;
+    /* left: 1056px; */
+    right: 120px;
 }
 
 .congrats-bubble {

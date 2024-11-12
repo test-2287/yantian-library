@@ -106,38 +106,38 @@ const libSwiperList = [
             }
         ]
     },
-    {
-        libname: '灯塔图书馆',
-        borrow: 12394,
-        return: 12944,
-        image: Guanhai,
-        monthsData: [
-            {
-                borrow: 200,
-                return: 150
-            },
-            {
-                borrow: 220,
-                return: 100
-            },
-            {
-                borrow: 100,
-                return: 50
-            },
-            {
-                borrow: 200,
-                return: 100
-            },
-            {
-                borrow: 220,
-                return: 80
-            },
-            {
-                borrow: 80,
-                return: 80
-            }
-        ]
-    }
+    // {
+    //     libname: '灯塔图书馆',
+    //     borrow: 12394,
+    //     return: 12944,
+    //     image: Guanhai,
+    //     monthsData: [
+    //         {
+    //             borrow: 200,
+    //             return: 150
+    //         },
+    //         {
+    //             borrow: 220,
+    //             return: 100
+    //         },
+    //         {
+    //             borrow: 100,
+    //             return: 50
+    //         },
+    //         {
+    //             borrow: 200,
+    //             return: 100
+    //         },
+    //         {
+    //             borrow: 220,
+    //             return: 80
+    //         },
+    //         {
+    //             borrow: 80,
+    //             return: 80
+    //         }
+    //     ]
+    // }
 
 ]
 
@@ -260,7 +260,8 @@ onMounted(() => {
 
 .lib-container {
     display: flex;
-    width: 2612px;
+    /* width: 2612px; */
+    width: 1970px;
     justify-content: space-between;
 }
 

@@ -285,8 +285,11 @@ const tlB1 = () => {
             opacity: 0,
             duration: 1,
             onComplete: () => {
-                tlF1()
-                currentFloor.value = 1
+                // tlF1()
+                // currentFloor.value = 1
+
+                tlF3()
+                currentFloor.value = 3
             }
         })
 
@@ -849,7 +852,8 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .lib-facade {
-    width: 2828px;
+    /* width: 2828px; */
+    width: 2162px;
     height: 1216px;
     position: relative;
     display: flex;
@@ -860,6 +864,7 @@ onMounted(() => {
     position: absolute;
     top: 70px;
     left: 70px;
+    z-index: 2;
 
     .lib-title-box,
     .floor-title-box {
@@ -886,6 +891,7 @@ onMounted(() => {
     left: 85px;
     top: 320px;
     opacity: 0;
+    z-index: 2;
 
 
     .floor-text {
@@ -910,12 +916,14 @@ onMounted(() => {
     top: 808.21px;
     left: 95px;
     opacity: 0;
+    z-index: 2;
 }
 
 .lib-floor-conditions {
     position: absolute;
     top: 70px;
-    right: 85px;
+    /* right: 85px; */
+    right: 40px;
 
     .condition-box {
         width: 460px;
@@ -1001,6 +1009,7 @@ onMounted(() => {
     transform: translateX(-50%);
     height: 1216px;
     min-width: 1124px;
+    z-index: 1;
 }
 
 .libBox {
@@ -1118,7 +1127,8 @@ onMounted(() => {
     width: 756px;
     height: 917px;
     top: 0;
-    left: -382px;
+    /* left: -382px; */
+    left: -228px;
 }
 
 .wall-right {

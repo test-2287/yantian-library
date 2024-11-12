@@ -266,7 +266,7 @@ onMounted(() => {
     </div>
 
     <div class="section-main">
-      <video ref="videoRef" width="2800" height="1216" class="background-video" @timeupdate="checkPause"
+      <video ref="videoRef" width="2162" height="1216" class="background-video" @timeupdate="checkPause"
         v-show="showVideo" muted>
         <source src="@/assets/background-animation.mp4">
       </video>
@@ -336,7 +336,8 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .homepage {
-  width: 4864px;
+  /* width: 4864px; */
+  width: 4226px;
   height: 1216px;
   display: grid;
   grid-template-columns: 1032px 1fr 1032px;
@@ -350,7 +351,8 @@ onMounted(() => {
 }
 
 .section-main {
-  width: 2800px;
+  /* width: 2800px; */
+  width: 2162px;
   height: 1216px;
   position: relative;
 }

@@ -44,9 +44,9 @@ const libConditionArray = [
     { name: "沙头角图书馆", condition: '良好' },
     { name: "中英街图书馆", condition: '良好' },
     { name: "邂逅图书馆", condition: '良好' },
-    { name: "盐田图书馆", condition: '良好' },
-    { name: "悦海图书馆", condition: '良好' },
-    { name: "听海图书馆", condition: '良好' },
+    // { name: "盐田图书馆", condition: '良好' },
+    // { name: "悦海图书馆", condition: '良好' },
+    // { name: "听海图书馆", condition: '良好' },
 ]
 
 let conditionBubblesArray = ref([])
@@ -256,19 +256,23 @@ onBeforeUnmount(() => {
     position: absolute;
     width: 1404px;
     height: 973px;
-    left: 300px;
+    /* left: 300px; */
+    left: 172px;
     top: 124px;
 }
 
 .lib-swiper-section {
     position: absolute;
-    width: 950px;
-    left: 1780px;
+    /* width: 950px; */
+    /* left: 1780px; */
+    width: 450px;
+    right: 70px;
     top: 70px;
     display: flex;
 
     .lib-swiper-box {
-        width: 950px;
+        /* width: 950px; */
+        width: 450px;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
@@ -296,7 +300,11 @@ onBeforeUnmount(() => {
             color: #68C945;
         }
 
-        &:not(:nth-last-child(-n+2)) {
+        /* &:not(:nth-last-child(-n+2)) {
+            margin-bottom: 40px;
+        } */
+
+        &:not(:nth-last-child(-n+1)) {
             margin-bottom: 40px;
         }
 
@@ -312,6 +320,9 @@ onBeforeUnmount(() => {
 }
 
 :deep(.swiper-pagination) {
+    left: unset;
+    right: 0;
+    width: auto;
     .swiper-pagination-bullet {
         width: 36px;
         height: 36px;

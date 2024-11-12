@@ -71,11 +71,13 @@ onMounted(() => {
 .qrcode-section {
     position: absolute;
     top: 376px;
-    left: 292px;
+    /* left: 292px; */
+    left: 90px;
 
     display: flex;
     .code-container {
-        margin-right: 165px;
+        /* margin-right: 165px; */
+        margin-right: 100px;
         .code-box {
             width: 400px;
             height: 400px;
@@ -105,7 +107,8 @@ onMounted(() => {
 .bubble-box {
     position: absolute;
     top: 715px;
-    left: 1480px;
+    /* left: 1480px; */
+    left: 1000px;
     width: 607px;
     height: 325px;
     padding: 60px;
