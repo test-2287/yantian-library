@@ -45,7 +45,8 @@ onMounted(() => {
     width: 550px;
     height: 298px;
     position: absolute;
-    left: 1840px;
+    /* left: 1840px; */
+    right: 100px;
     top: 134px;
     background-image: url('@/assets/svg/bubble-515.svg');
     background-size: 550px 298px;

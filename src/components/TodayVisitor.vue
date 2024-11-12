@@ -168,14 +168,15 @@ onMounted(() => {
 .map-section {
     position: absolute;
     top: 124px;
-    left: 300px;
+    /* left: 300px; */
+    left: 96px;
 }
 
 .visitor-data-section {
     position: absolute;
     top: 70px;
-    right: 100px;
-    width: 850px;
+    right: 70px;
+    width: 820px;
 
     .data-box {
         display: flex;

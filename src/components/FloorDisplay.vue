@@ -22,7 +22,8 @@ const floorAnimationFinish = () => {
 <style scoped>
 .section-floors {
     overflow: hidden;
-    width: 2828px;
+    /* width: 2828px; */
+    width: 2162px;
     height: 1216px;
     display: flex;
     justify-content: center;

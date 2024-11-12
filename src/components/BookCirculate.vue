@@ -145,7 +145,8 @@ onMounted(() => {
 .map-section {
     position: absolute;
     top: 100px;
-    left: 1040px;
+    /* left: 1040px; */
+    right:80px;
 
     .circulate-line {
         position: absolute;

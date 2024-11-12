@@ -7,7 +7,7 @@ import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-import { ref, nextTick, onMounted } from 'vue';
+import { ref, nextTick, onMounted, onUnmounted } from 'vue';
 import gsap from 'gsap';
 import { delay } from 'lodash-es';
 
@@ -42,10 +42,10 @@ const libBorrowArray = [
     { libname: "中英街道图书馆", borrowCount: 128 },
     { libname: "邂逅图书馆", borrowCount: 128 },
     { libname: "海山街道图书馆", borrowCount: 128 },
-    { libname: "盐田图书馆", borrowCount: 128 },
-    { libname: "灯塔图书馆", borrowCount: 128 },
-    { libname: "悦海图书馆", borrowCount: 128 },
-    { libname: "听海图书馆", borrowCount: 128 },
+    // { libname: "盐田图书馆", borrowCount: 128 },
+    // { libname: "灯塔图书馆", borrowCount: 128 },
+    // { libname: "悦海图书馆", borrowCount: 128 },
+    // { libname: "听海图书馆", borrowCount: 128 },
 ]
 
 let borrowBubblesArray = ref([])
@@ -70,16 +70,17 @@ const getBorrowBubblesArray = () => {
     ]
 }
 borrowBubblesArray.value = getBorrowBubblesArray()
+
+const tlBubble = gsap.timeline({
+    onComplete: async () => {
+        borrowBubblesArray.value = getBorrowBubblesArray()
+        console.log(borrowBubblesArray.value);
+        await nextTick()
+        animationBubbles()
+    }
+});
 const animationBubbles = async () => {
     await nextTick()
-    const tlBubble = gsap.timeline({
-        onComplete: async () => {
-            borrowBubblesArray.value = getBorrowBubblesArray()
-            console.log(borrowBubblesArray.value);
-            await nextTick()
-            animationBubbles()
-        }
-    });
     tlBubble.from('.borrow-bubble', {
         opacity: 0,
     })
@@ -98,11 +99,15 @@ const animationBubbles = async () => {
 const emit = defineEmits(['current-animation-finish'])
 
 onMounted(() => {
-    // animationBubbles()
+    animationBubbles()
 
     setTimeout(() => {
         emit('current-animation-finish')
     }, 4000)
+})
+
+onUnmounted(() => {
+    tlBubble.kill()
 })
 
 
@@ -118,7 +123,8 @@ onMounted(() => {
         <div class="map-section">
             <YanTianMap />
 
-            <BorrowBubble v-for="borrowItem in borrowBubblesArray" :key="`${borrowItem.username}`" v-bind="borrowItem" />
+            <BorrowBubble v-for="borrowItem in borrowBubblesArray" :key="`${borrowItem.username}`"
+                v-bind="borrowItem" />
 
         </div>
         <div class="borrow-data-section">
@@ -161,12 +167,14 @@ onMounted(() => {
 
 .borrow-data-section {
     position: absolute;
-    width: 856px;
+    /* width: 856px; */
+    width: 450px;
     top: 382px;
     left: 80px;
 
     .borrow-data-swiper {
-        width: 856px;
+        /* width: 856px; */
+        width: 450px;
         height: 650px;
         border: 4px solid #3692FF;
         border-radius: 40px;
@@ -191,10 +199,14 @@ onMounted(() => {
             position: relative;
 
             &:nth-child(2n+1) {
-                margin-right: 50px;
+                /* margin-right: 50px; */
             }
 
-            &:not(:nth-last-child(-n+2)) {
+            /* &:not(:nth-last-child(-n+2)) {
+                margin-bottom: 30px;
+            } */
+
+            &:not(:last-child) {
                 margin-bottom: 30px;
             }
 
@@ -203,7 +215,7 @@ onMounted(() => {
                 display: block;
                 position: absolute;
                 top: 11px;
-                left:0;
+                left: 0;
                 width: 24px;
                 height: 24px;
                 border-radius: 50%;
@@ -218,7 +230,8 @@ onMounted(() => {
 .map-section {
     position: absolute;
     top: 100px;
-    left: 1091px;
+    /* left: 1091px; */
+    right: 186px;
 }
 
 :deep(.swiper) {
@@ -233,6 +246,7 @@ onMounted(() => {
         border: 4px solid #3692FF;
         margin: 0 10px;
     }
+
     .swiper-pagination-bullet-active {
         background-color: #3692FF;
     }

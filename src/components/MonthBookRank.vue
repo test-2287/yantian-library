@@ -35,14 +35,14 @@ const monthBookRank = [
         borrowCount: 62,
         image: ''
     },
-    {
-        bookName: '思考，好与坏',
-        publisher: '重庆出版社',
-        author: '杨念群',
-        isbn: 9787020184262,
-        borrowCount: 62,
-        image: ''
-    },
+    // {
+    //     bookName: '思考，好与坏',
+    //     publisher: '重庆出版社',
+    //     author: '杨念群',
+    //     isbn: 9787020184262,
+    //     borrowCount: 62,
+    //     image: ''
+    // },
 ]
 
 const emit = defineEmits(['current-animation-finish'])

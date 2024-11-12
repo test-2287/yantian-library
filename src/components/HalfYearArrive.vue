@@ -157,7 +157,8 @@ onMounted(() => {
 
 <style scoped>
 .page-today-arrive {
-    width: 2828px;
+    /* width: 2828px; */
+    width: 2162px;
     height: 1216px;
     /* background-color: #E7F2FF; */
     position: relative;
@@ -166,7 +167,8 @@ onMounted(() => {
 
 .blue-layer {
     position: relative;
-    width: 2828px;
+    /* width: 2828px; */
+    width: 2162px;
     height: 1216px;
     /* background-color: #C0DDFF; */
     /* clip-path: ellipse(2828px 1300px at 1950px 530px); */
@@ -192,7 +194,8 @@ onMounted(() => {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    right: 200px;
+    /* right: 200px; */
+    right: 105px;
 
     display: flex;
     flex-direction: column;
