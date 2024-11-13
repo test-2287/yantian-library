@@ -267,7 +267,7 @@ onMounted(() => {
 
     <div class="section-main">
       <video ref="videoRef" width="2162" height="1216" class="background-video" @timeupdate="checkPause"
-        v-show="showVideo" muted>
+        v-show="showVideo" onloadedmetadata="this.playbackRate = 0.75;" muted>
         <source src="@/assets/background-animation.mp4">
       </video>
 
