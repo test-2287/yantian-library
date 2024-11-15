@@ -268,7 +268,7 @@ onMounted(() => {
     <div class="section-main">
       <video ref="videoRef" width="2162" height="1216" class="background-video" @timeupdate="checkPause"
         v-show="showVideo" onloadedmetadata="this.playbackRate = 0.75;" muted>
-        <source src="@/assets/background-animation.mp4">
+        <source src="@/assets/background-animation-2.mp4">
       </video>
 
       <component :is="animationOrder[curAnimation]" @current-animation-finish="playNext" v-show="curAnimation != -1" />

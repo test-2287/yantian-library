@@ -63,7 +63,8 @@ onMounted(() => {
 .congrats-bubble {
     position: absolute;
     top: 323px;
-    left: 616px;
+    /* left: 616px; */
+    left: 416px;
     width: 515px;
     height: 298px;
     padding: 52px;
