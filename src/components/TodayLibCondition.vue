@@ -257,8 +257,8 @@ onBeforeUnmount(() => {
     width: 1404px;
     height: 973px;
     /* left: 300px; */
-    left: 172px;
-    top: 124px;
+    left: 120px;
+    top: 145px;
 }
 
 .lib-swiper-section {

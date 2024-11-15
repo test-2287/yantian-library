@@ -106,9 +106,9 @@ onMounted(() => {
 
 .bubble-box {
     position: absolute;
-    top: 715px;
+    top: 679px;
     /* left: 1480px; */
-    left: 1000px;
+    left: 1036px;
     width: 607px;
     height: 325px;
     padding: 60px;
